@@ -1,0 +1,14 @@
+{
+  "name": "jrfeed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.1",
+    "cheerio": "^1.1.2"
+  }
+}
