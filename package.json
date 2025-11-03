@@ -18,13 +18,5 @@
   "devDependencies": {
     "nodemon": "^3.0.2"
   },
-  "keywords": [
-    "rss",
-    "france-tv",
-    "orthodoxie",
-    "scraper",
-    "fastify"
-  ],
-  "author": "Votre nom",
-  "license": "MIT"
+  "author": "Votre nom"
 }
