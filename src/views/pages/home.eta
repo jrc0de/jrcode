@@ -1,0 +1,53 @@
+<%~ include("../partials/header.eta") %>
+
+    <h2>🐙 Git
+        <a href="https://git-scm.com/cheat-sheet" target="_blank"
+            style="display:inline-flex; align-items:center; gap:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6" />
+                <path d="M10 14 21 3" />
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
+        </a>
+    </h2>
+    <ul>
+        <li><code>git clone &lt;url_du_repo&gt;</code> – Cloner un dépôt</li>
+    </ul>
+
+    <h2>🟢 Node.js
+        <a href="https://nodejs.org/fr" target="_blank"
+            style="display:inline-flex; align-items:center; gap:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6" />
+                <path d="M10 14 21 3" />
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
+        </a>
+    </h2>
+    <ul>
+        <li><code>node -v</code> – Vérifier la version de Node</li>
+        <li><code>node fichier.js</code> – Exécuter un script JavaScript</li>
+        <li><code>npm init</code> – Initialiser un projet Node avec npm</li>
+    </ul>
+
+    <h2>📦 npm
+        <a href="https://docs.npmjs.com/cli/v11/commands" target="_blank"
+            style="display:inline-flex; align-items:center; gap:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6" />
+                <path d="M10 14 21 3" />
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
+        </a>
+    </h2>
+    <ul>
+        <li><code>npm install &lt;package&gt;</code> – Installer un package</li>
+        <li><code>npm i &lt;package&gt;</code> – Idem</li>
+        <li><code>npm update</code> – Mettre à jour les packages</li>
+        <li><code>npm run &lt;script&gt;</code> – Exécuter un script défini dans package.json</li>
+    </ul>
+
+    <%~ include("../partials/footer.eta") %>
