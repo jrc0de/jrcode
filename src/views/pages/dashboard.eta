@@ -2,19 +2,23 @@
 
 <h2>📈 Tracking</h2>
 <p>Taux de complétion des différentes tables en base de données :</p>
+
 <article>
     <h3>Vies brèves</h3>
-    <progress value="88" max="100" />
+    <progress value="<%= it.stats.stat_short %>" max="100"></progress>
+    <span><%= it.stats.stat_short %>%</span>
 </article>
 
 <article>
     <h3>Vies longues</h3>
-    <progress value="88" max="100" />
+    <progress value="<%= it.stats.stat_long %>" max="100"></progress>
+    <span><%= it.stats.stat_long %>%</span>
 </article>
 
 <article>
     <h3>Illustrations</h3>
-    <progress value="88" max="100" />
+    <progress value="<%= it.stats.stat_img %>" max="100"></progress>
+    <span><%= it.stats.stat_img %>%</span>
 </article>
 
 <%~ include("../partials/footer.eta") %>
