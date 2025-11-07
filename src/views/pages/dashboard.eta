@@ -1,7 +1,7 @@
 <%~ include("../partials/header.eta") %>
 
 <h2>📈 Tracking</h2>
-<p>Taux de complétion des différentes tables en base de données :</p>
+<p>Taux de remplissage de la base de données pour l'application ECOF :</p>
 
 <article>
     <h3>Vies brèves</h3>

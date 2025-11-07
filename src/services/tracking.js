@@ -11,11 +11,11 @@ export async function getTrackingInfo () {
     `)
 
     const stat = rows[0]
-    
-    return { 
-      stat_short: stat.stat_short, 
-      stat_long: stat.stat_long, 
-      stat_img: stat.stat_img 
+
+    return {
+      stat_short: stat.stat_short,
+      stat_long: stat.stat_long,
+      stat_img: stat.stat_img
     }
   } catch (err) {
     throw new Error(
