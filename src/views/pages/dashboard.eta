@@ -1,0 +1,20 @@
+<%~ include("../partials/header.eta") %>
+
+<h2>📈 Tracking</h2>
+<p>Taux de complétion des différentes tables en base de données :</p>
+<article>
+    <h3>Vies brèves</h3>
+    <progress value="88" max="100" />
+</article>
+
+<article>
+    <h3>Vies longues</h3>
+    <progress value="88" max="100" />
+</article>
+
+<article>
+    <h3>Illustrations</h3>
+    <progress value="88" max="100" />
+</article>
+
+<%~ include("../partials/footer.eta") %>
