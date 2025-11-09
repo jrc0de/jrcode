@@ -1,18 +1,7 @@
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 
-let cachedVideos = null
-let lastFetch = 0
-const CACHE_DURATION = 30 * 60 * 1000 // 30 minutes
-
 async function scrapeOrthodoxieVideos() {
-  const now = Date.now()
-
-  if (cachedVideos && (now - lastFetch) < CACHE_DURATION) {
-    console.log('🟢 Données en cache utilisées')
-    return cachedVideos
-  }
-
   try {
     const { data: html } = await axios.get(
       'https://www.france.tv/france-2/orthodoxie/toutes-les-videos/',
@@ -67,17 +56,15 @@ async function scrapeOrthodoxieVideos() {
           })
         }
       } catch (err) {
-        console.error(`Erreur sur l’élément ${i}:`, err.message)
+        console.error(`Erreur sur l'élément ${i}:`, err.message)
       }
     })
 
-    cachedVideos = videos
-    lastFetch = now
     console.log(`✅ ${videos.length} vidéos scrapées`)
     return videos
   } catch (error) {
     console.error('❌ Erreur lors du scraping:', error.message)
-    return cachedVideos || []
+    return []
   }
 }
 
@@ -135,7 +122,6 @@ function generateRSSFromVideos(videos) {
 </rss>`
 }
 
-// ✅ plugin Fastify exporté
 export default async function (fastify, opts) {
   fastify.get('/feed1', async (request, reply) => {
     const videos = await scrapeOrthodoxieVideos()
