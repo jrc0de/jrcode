@@ -22,7 +22,6 @@ async function scrapeOrthodoxieVideos() {
 
         const videos = []
 
-        // ✅ même ciblage que le script Railway
         const ul = $('ul.cYdhWw.bYqadz.dsmMTm.hsLHiM.gsLiKq.iAgshX.gsLiKH.fqiJkQ.bYPznK')
 
         ul.find('li').each((i, elem) => {
