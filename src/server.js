@@ -23,7 +23,7 @@ app.register(fastifyView, {
 // Servir dossier public
 app.register(fastifyStatic, {
   root: join(__dirname, '..', 'public'),
-  prefix: '/public/',
+  prefix: '/',
   decorateReply: false
 })
 
