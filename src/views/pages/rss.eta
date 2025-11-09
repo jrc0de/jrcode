@@ -1,7 +1,7 @@
 <%~ include("../partials/header.eta") %>
 
 <h2>📡 Flux RSS</h2>
-<p>Récupérez des flux pour vous y abonner dans votre lecteur RSS préféré :</p>
+<p>Récupérez des flux pour vous y abonner dans votre lecteur RSS préféré&nbsp;:</p>
 
 <ol>
     <li>Copiez l'URL d'un flux ci-dessous</li>
