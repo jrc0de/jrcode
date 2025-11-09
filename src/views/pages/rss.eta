@@ -27,4 +27,22 @@
     <button onclick="navigator.clipboard.writeText(`https://www.jrcode.name/rss/feed1`)">📋 Copier l'URL</button>
 </article>
 
+<article>
+    <h3>
+        Emission Vaqui sur France 3
+        <a href="https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui/" target="_blank" 
+           style="display:inline-flex; align-items:center; gap:4px;" 
+           aria-label="Voir le site de l'émission Vaqui sur France 3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6"/>
+                <path d="M10 14 21 3"/>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            </svg>
+        </a>
+    </h3>
+    <h6 style="font-family:monospace;">https://www.jrcode.name/rss/feed2</h6>
+    <button onclick="navigator.clipboard.writeText(`https://www.jrcode.name/rss/feed2`)">📋 Copier l'URL</button>
+</article>
+
 <%~ include("../partials/footer.eta") %>
