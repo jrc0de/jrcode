@@ -69,6 +69,10 @@
         <li><code>cd C:\Users\MonDossier</code> – Changer de répertoire</li>
         <li><code>mkdir &lt;dossier&gt;</code> – Créer un dossier</li>
         <li><code>code .</code> – Ouvrir VS Code dans le dossier actuel</li>
+        <li><code>curl https://domaine.com</code> – Requête HTTP/HTTPS en GET</li>
+        <li><code>clear</code> – Vider la console</li>
+        <li><code>tree</code> – Arborescence des dossiers</li>
+        <li><code>tree /F</code> – Arborescence des dossiers et fichiers</li>
     </ul>
 
     <%~ include("../partials/footer.eta") %>
