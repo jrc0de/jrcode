@@ -1,9 +1,10 @@
+// src/api/rss/feed1.js
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 
 let cachedVideos = null
 let lastFetch = 0
-const CACHE_DURATION = 30 * 60 * 1000 // 30 minutes
+const CACHE_DURATION = 30 * 60 * 1000 // 30 min
 
 async function scrapeOrthodoxieVideos() {
   const now = Date.now()
@@ -33,7 +34,6 @@ async function scrapeOrthodoxieVideos() {
     const $ = cheerio.load(html)
     const videos = []
 
-    // sélecteur principal
     const ul = $('ul.cYdhWw.bYqadz.dsmMTm.hsLHiM.gsLiKq.iAgshX.gsLiKH.fqiJkQ.bYPznK')
 
     ul.find('li').each((i, elem) => {
@@ -135,12 +135,11 @@ function generateRSSFromVideos(videos) {
 </rss>`
 }
 
-// ✅ plugin Fastify exporté
+// ✅ Plugin Fastify
 export default async function (fastify, opts) {
   fastify.get('/feed1', async (request, reply) => {
     const videos = await scrapeOrthodoxieVideos()
     const rss = generateRSSFromVideos(videos)
-
-    return reply.type('application/rss+xml; charset=utf-8').send(rss)
+    reply.type('application/rss+xml; charset=utf-8').send(rss)
   })
 }
