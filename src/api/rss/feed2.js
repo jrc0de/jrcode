@@ -1,73 +1,84 @@
-import axios from 'axios'
-import * as cheerio from 'cheerio'
+import puppeteer from 'puppeteer'
 
 async function scrapeVaquiVideos() {
+  const browser = await puppeteer.launch({ headless: true })
+  const page = await browser.newPage()
+
   try {
-    const { data: html } = await axios.get(
-      'https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui/toutes-les-videos/',
-      {
-        headers: {
-          'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0',
-          'Accept':
-            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-          'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
-          'Referer': 'https://www.france.tv/',
-          'Connection': 'keep-alive'
-        },
-        timeout: 15000
-      }
-    )
-
-    const $ = cheerio.load(html)
-    const videos = []
-
-    // sélecteur principal
-    const ul = $('ul.cYdhWw.bYqadz.dsmMTm.hsLHiM.gsLiKq.iAgshX.gsLiKH.fqiJkQ.bYPznK')
-
-    ul.find('li').each((i, elem) => {
-      try {
-        const lien = $(elem).find('a.lnMwsN').attr('href')
-        const titreElement = $(elem).find('span[data-type="title"]').first()
-        const sousTitreElement = $(elem).find('span[data-type="subtitle"]').first()
-
-        const titre = titreElement.text().trim()
-        const sousTitre = sousTitreElement.text().trim()
-        const titreComplet = sousTitre ? `${sousTitre} - ${titre}` : titre
-
-        const description = $(elem).find('.fLAmAH').text().trim()
-
-        const dateText = $(elem)
-          .find('.gxLqec')
-          .filter(function () {
-            return $(this).text().includes('Diffusé le')
-          })
-          .text()
-          .trim()
-
-        const lienComplet = lien ? `https://www.france.tv${lien}` : ''
-
-        if (titreComplet && lienComplet) {
-          videos.push({
-            title: titreComplet,
-            link: lienComplet,
-            description: description || '',
-            pubDate: convertirDateFrancaise(dateText.replace('Diffusé le ', ''))
-          })
-        }
-      } catch (err) {
-        console.error(`Erreur sur l'élément ${i}:`, err.message)
-      }
+    // Définir le User-Agent via ExtraHTTPHeaders (non-déprécié)
+    await page.setExtraHTTPHeaders({
+      'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'
     })
 
-    console.log(`✅ ${videos.length} vidéos scrapées`)
+    console.log('🌐 Chargement de la page...')
+    await page.goto(
+      'https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui/toutes-les-videos/',
+      { waitUntil: 'domcontentloaded', timeout: 30000 }
+    )
+
+    // Attente pour laisser le JS générer le contenu
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    console.log('📋 Extraction des vidéos depuis le premier <ul> après le <h1>...')
+    const videos = await page.evaluate(() => {
+      const main = document.querySelector('main')
+      if (!main) return []
+
+      const h1 = main.querySelector('h1')
+      if (!h1) return []
+
+      // Trouver le premier <ul> après le <h1> dans le DOM
+      function findNextUL(node) {
+        const walker = document.createTreeWalker(main, NodeFilter.SHOW_ELEMENT)
+        let foundH1 = false
+        while (walker.nextNode()) {
+          const el = walker.currentNode
+          if (el === h1) {
+            foundH1 = true
+            continue
+          }
+          if (foundH1 && el.tagName.toLowerCase() === 'ul') {
+            return el
+          }
+        }
+        return null
+      }
+
+      const ul = findNextUL(main)
+      if (!ul) return []
+
+      // Parcours des <li>
+      return Array.from(ul.querySelectorAll('li')).map((li) => {
+        const lien = li.querySelector('a')?.href || ''
+        const titre = li.querySelector('span[data-type="title"]')?.textContent?.trim() || ''
+        const sousTitre = li.querySelector('span[data-type="subtitle"]')?.textContent?.trim() || ''
+        const description = li.querySelector('p, .fLAmAH')?.textContent?.trim() || ''
+        const dateText = [...li.querySelectorAll('*')]
+          .map((n) => n.textContent)
+          .find((txt) => txt.includes('Diffusé le')) || ''
+        const titreComplet = sousTitre ? `${sousTitre} - ${titre}` : titre
+
+        return {
+          title: titreComplet,
+          link: lien,
+          description,
+          pubDate: dateText.replace('Diffusé le ', '').trim()
+        }
+      })
+    })
+
+    console.log(`✅ ${videos.length} vidéos récupérées`)
     return videos
   } catch (error) {
-    console.error('❌ Erreur lors du scraping:', error.message)
+    console.error('❌ Erreur Puppeteer:', error.message)
     return []
+  } finally {
+    await browser.close()
   }
 }
 
+// Convertir une date française en UTC
 function convertirDateFrancaise(dateStr) {
   try {
     const [jour, mois, annee] = dateStr.split('/')
@@ -78,6 +89,7 @@ function convertirDateFrancaise(dateStr) {
   }
 }
 
+// Génération RSS
 function generateRSSFromVideos(videos) {
   if (videos.length === 0) {
     return `<?xml version="1.0" encoding="UTF-8"?>
@@ -98,12 +110,12 @@ function generateRSSFromVideos(videos) {
 
   const items = videos
     .map(
-      video => `
+      (video) => `
     <item>
       <title><![CDATA[${video.title}]]></title>
       <link>${video.link}</link>
       <description><![CDATA[${video.description}]]></description>
-      <pubDate>${video.pubDate}</pubDate>
+      <pubDate>${convertirDateFrancaise(video.pubDate)}</pubDate>
       <guid>${video.link}</guid>
     </item>`
     )
@@ -122,11 +134,11 @@ function generateRSSFromVideos(videos) {
 </rss>`
 }
 
+// Route Fastify pour le flux RSS
 export default async function (fastify, opts) {
   fastify.get('/feed2', async (request, reply) => {
     const videos = await scrapeVaquiVideos()
     const rss = generateRSSFromVideos(videos)
-
     return reply.type('application/rss+xml; charset=utf-8').send(rss)
   })
 }
