@@ -1,11 +1,14 @@
 import puppeteer from 'puppeteer'
 
 async function scrapeVaquiVideos() {
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'] // 🔑 nécessaire pour Linux root
+  })
   const page = await browser.newPage()
 
   try {
-    // Définir le User-Agent via ExtraHTTPHeaders (non-déprécié)
+    // User-Agent non-déprécié
     await page.setExtraHTTPHeaders({
       'User-Agent':
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0'
@@ -17,7 +20,7 @@ async function scrapeVaquiVideos() {
       { waitUntil: 'domcontentloaded', timeout: 30000 }
     )
 
-    // Attente pour laisser le JS générer le contenu
+    // Attente pour que le JS rende le contenu
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
     console.log('📋 Extraction des vidéos depuis le premier <ul> après le <h1>...')
@@ -28,7 +31,7 @@ async function scrapeVaquiVideos() {
       const h1 = main.querySelector('h1')
       if (!h1) return []
 
-      // Trouver le premier <ul> après le <h1> dans le DOM
+      // Trouver le premier <ul> après le <h1>
       function findNextUL(node) {
         const walker = document.createTreeWalker(main, NodeFilter.SHOW_ELEMENT)
         let foundH1 = false
@@ -48,7 +51,6 @@ async function scrapeVaquiVideos() {
       const ul = findNextUL(main)
       if (!ul) return []
 
-      // Parcours des <li>
       return Array.from(ul.querySelectorAll('li')).map((li) => {
         const lien = li.querySelector('a')?.href || ''
         const titre = li.querySelector('span[data-type="title"]')?.textContent?.trim() || ''
