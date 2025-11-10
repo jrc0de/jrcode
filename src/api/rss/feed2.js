@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer'
 async function scrapeVaquiVideos() {
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'] // 🔑 nécessaire pour Linux root
+    args: ['--no-sandbox', '--disable-setuid-sandbox'] // 🔑 nécessaire si root
   })
   const page = await browser.newPage()
 
@@ -31,7 +31,6 @@ async function scrapeVaquiVideos() {
       const h1 = main.querySelector('h1')
       if (!h1) return []
 
-      // Trouver le premier <ul> après le <h1>
       function findNextUL(node) {
         const walker = document.createTreeWalker(main, NodeFilter.SHOW_ELEMENT)
         let foundH1 = false
@@ -80,23 +79,30 @@ async function scrapeVaquiVideos() {
   }
 }
 
-// Convertir une date française en UTC
+// Convertir une date française en RFC-822 (UTC)
 function convertirDateFrancaise(dateStr) {
   try {
+    if (!dateStr) throw new Error('Empty date')
+
     const [jour, mois, annee] = dateStr.split('/')
-    const date = new Date(annee, mois - 1, jour)
-    return date.toUTCString()
+    const date = new Date(Date.UTC(annee, mois - 1, jour, 0, 0, 0))
+    if (isNaN(date.getTime())) throw new Error('Invalid date')
+
+    return date.toUTCString() 
   } catch {
-    return new Date().toUTCString()
+    return new Date().toUTCString() 
   }
 }
 
 // Génération RSS
 function generateRSSFromVideos(videos) {
+  const feedUrl = 'https://www.jrcode.name/rss/feed2' 
+
   if (videos.length === 0) {
     return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
+    <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />
     <title>Vaqui - France 3</title>
     <link>https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui</link>
     <description>Les dernières émissions Vaqui sur France 3</description>
@@ -105,6 +111,7 @@ function generateRSSFromVideos(videos) {
     <item>
       <title>Aucune vidéo disponible</title>
       <description>Impossible de récupérer les vidéos pour le moment</description>
+      <pubDate>${new Date().toUTCString()}</pubDate>
     </item>
   </channel>
 </rss>`
@@ -126,6 +133,7 @@ function generateRSSFromVideos(videos) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
+    <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />
     <title>Vaqui - France 3</title>
     <link>https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui</link>
     <description>Les dernières émissions Vaqui sur France 3</description>
