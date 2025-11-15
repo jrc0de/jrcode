@@ -3,7 +3,15 @@ import puppeteer from 'puppeteer'
 async function scrapeVaquiVideos() {
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'] // 🔑 nécessaire si root
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',        // 🔑 CRITIQUE pour éviter les erreurs de mémoire partagée
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--disable-gpu'
+    ]
   })
   const page = await browser.newPage()
 
