@@ -66,15 +66,14 @@
         </a>
     </h2>
     <ul>
-        <li><code>cd C:\Users\MonDossier</code> – Changer de répertoire</li>
+        <li><code>cd &lt;path&gt;</code> – Changer de répertoire</li>
         <li><code>mkdir &lt;dossier&gt;</code> – Créer un dossier</li>
         <li><code>code .</code> – Ouvrir VS Code dans le dossier actuel</li>
-        <li><code>curl https://domaine.com</code> – Requête HTTP/HTTPS en GET</li>
         <li><code>clear</code> – Vider la console</li>
         <li><code>tree</code> – Arborescence des dossiers</li>
         <li><code>tree /F</code> – Arborescence des dossiers et fichiers</li>
-        <li><code>curl &lt;url&gt;</code> – Affiche le contenu de l'URL</li>
-        <li><code>curl -o filename.html &lt;url&gt;</code> – Télécharge le contenu de l'URL dans filename.html</li>
+        <li><code>curl &lt;url&gt;</code> – Requête HTTP/HTTPS en GET</li>
+        <li><code>curl -o filename.html &lt;url&gt;</code> – Récupère le contenu de la requête dans filename.html</li>
     </ul>
 
     <%~ include("../partials/footer.eta") %>
