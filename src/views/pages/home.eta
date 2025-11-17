@@ -73,6 +73,8 @@
         <li><code>clear</code> – Vider la console</li>
         <li><code>tree</code> – Arborescence des dossiers</li>
         <li><code>tree /F</code> – Arborescence des dossiers et fichiers</li>
+        <li><code>curl &lt;url&gt;</code> – Affiche le contenu de l'URL</li>
+        <li><code>curl -o filename.html &lt;url&gt;</code> – Télécharge le contenu de l'URL dans filename.html</li>
     </ul>
 
     <%~ include("../partials/footer.eta") %>

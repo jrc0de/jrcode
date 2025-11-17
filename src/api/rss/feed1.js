@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 
-async function scrapeOrthodoxieVideos() {
+async function scrapeOrthodoxieVideos () {
   try {
     const { data: html } = await axios.get(
       'https://www.france.tv/france-2/orthodoxie/toutes-les-videos/',
@@ -9,11 +9,11 @@ async function scrapeOrthodoxieVideos() {
         headers: {
           'User-Agent':
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0',
-          'Accept':
+          Accept:
             'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
-          'Referer': 'https://www.france.tv/',
-          'Connection': 'keep-alive'
+          Referer: 'https://www.france.tv/',
+          Connection: 'keep-alive'
         },
         timeout: 15000
       }
@@ -68,7 +68,7 @@ async function scrapeOrthodoxieVideos() {
   }
 }
 
-function convertirDateFrancaise(dateStr) {
+function convertirDateFrancaise (dateStr) {
   try {
     const [jour, mois, annee] = dateStr.split('/')
     const date = new Date(annee, mois - 1, jour)
@@ -78,7 +78,7 @@ function convertirDateFrancaise(dateStr) {
   }
 }
 
-function generateRSSFromVideos(videos) {
+function generateRSSFromVideos (videos) {
   if (videos.length === 0) {
     return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
