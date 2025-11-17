@@ -1,7 +1,24 @@
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 
+// Cache en mémoire
+const cache = {
+  data: null,
+  timestamp: null
+}
+
+const CACHE_DURATION = 3 * 60 * 60 * 1000
+
 async function scrapeOrthodoxieVideos () {
+  // Vérifier le cache
+  const now = Date.now()
+  if (cache.data && cache.timestamp && (now - cache.timestamp < CACHE_DURATION)) {
+    console.log('✨ Utilisation du cache Orthodoxie (age: ' + Math.round((now - cache.timestamp) / 1000 / 60) + ' min)')
+    return cache.data
+  }
+
+  console.log('🔄 Cache Orthodoxie expiré ou vide, récupération des données...')
+
   try {
     const { data: html } = await axios.get(
       'https://www.france.tv/france-2/orthodoxie/toutes-les-videos/',
@@ -61,6 +78,11 @@ async function scrapeOrthodoxieVideos () {
     })
 
     console.log(`✅ ${videos.length} vidéos scrapées`)
+
+    // Mettre en cache
+    cache.data = videos
+    cache.timestamp = Date.now()
+
     return videos
   } catch (error) {
     console.error('❌ Erreur lors du scraping:', error.message)

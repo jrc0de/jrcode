@@ -12,13 +12,12 @@ async function scrapeVaquiVideos () {
   // Vérifier le cache
   const now = Date.now()
   if (cache.data && cache.timestamp && (now - cache.timestamp < CACHE_DURATION)) {
-    console.log('✨ Utilisation du cache (age: ' + Math.round((now - cache.timestamp) / 1000 / 60) + ' min)')
+    console.log('✨ Utilisation du cache Vaqui (age: ' + Math.round((now - cache.timestamp) / 1000 / 60) + ' min)')
     return cache.data
   }
 
-  console.log('🔄 Cache expiré ou vide, récupération des données...')
+  console.log('🔄 Cache Vaqui expiré ou vide, récupération des données...')
   try {
-    console.log('🌐 Récupération de la page...')
     const response = await fetch(
       'https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui/toutes-les-videos/',
       {
@@ -36,8 +35,6 @@ async function scrapeVaquiVideos () {
 
     const html = await response.text()
     const $ = cheerio.load(html)
-
-    console.log('📋 Extraction des vidéos depuis le premier <ul> après le <h1>...')
 
     // Trouve le main
     const main = $('main')
