@@ -67,13 +67,13 @@
     </h2>
     <ul>
         <li><code>cd &lt;path&gt;</code> – Changer de répertoire</li>
-        <li><code>mkdir &lt;dossier&gt;</code> – Créer un dossier</li>
+        <li><code>mkdir &lt;folder&gt;</code> – Créer un dossier</li>
         <li><code>code .</code> – Ouvrir VS Code dans le dossier actuel</li>
         <li><code>clear</code> – Vider la console</li>
         <li><code>tree</code> – Arborescence des dossiers</li>
         <li><code>tree /F</code> – Arborescence des dossiers et fichiers</li>
         <li><code>curl &lt;url&gt;</code> – Requête HTTP/HTTPS en GET</li>
-        <li><code>curl -o filename.html &lt;url&gt;</code> – Récupère le contenu de la requête dans filename.html</li>
+        <li><code>curl -o &lt;file.ext&gt; &lt;url&gt;</code> – Récupérer le contenu de la requête dans un fichier</li>
     </ul>
 
     <%~ include("../partials/footer.eta") %>
