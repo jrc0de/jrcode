@@ -146,9 +146,9 @@ function generateRSSFromVideos (videos) {
 
 export default async function (fastify, opts) {
   fastify.get('/feed1', async (request, reply) => {
+    console.log(`📥 Requête /feed2 - IP: ${request.ip} - UA: ${request.headers['user-agent']?.substring(0, 50)}...`)
     const videos = await scrapeOrthodoxieVideos()
     const rss = generateRSSFromVideos(videos)
-
     return reply.type('application/rss+xml; charset=utf-8').send(rss)
   })
 }

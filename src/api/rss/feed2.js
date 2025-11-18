@@ -180,6 +180,7 @@ function generateRSSFromVideos (videos) {
 // Route Fastify pour le flux RSS
 export default async function (fastify, opts) {
   fastify.get('/feed2', async (request, reply) => {
+    console.log(`📥 Requête /feed2 - IP: ${request.ip} - UA: ${request.headers['user-agent']?.substring(0, 50)}...`)
     const videos = await scrapeVaquiVideos()
     const rss = generateRSSFromVideos(videos)
     return reply.type('application/rss+xml; charset=utf-8').send(rss)
