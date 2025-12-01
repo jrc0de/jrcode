@@ -12,7 +12,7 @@
 <article>
     <h3>
         Emission Orthodoxie sur France 2
-        <a href="https://www.france.tv/france-2/orthodoxie" target="_blank" 
+        <a href="https://www.france.tv/france-2/orthodoxie/toutes-les-videos/" target="_blank" 
            style="display:inline-flex; align-items:center; gap:4px;" 
            aria-label="Voir le site de l'émission Orthodoxie sur France 2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -30,7 +30,7 @@
 <article>
     <h3>
         Emission Vaqui sur France 3
-        <a href="https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui/" target="_blank" 
+        <a href="https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui/toutes-les-videos/" target="_blank" 
            style="display:inline-flex; align-items:center; gap:4px;" 
            aria-label="Voir le site de l'émission Vaqui sur France 3">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
