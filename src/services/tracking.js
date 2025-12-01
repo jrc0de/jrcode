@@ -5,7 +5,7 @@ export async function getTrackingInfo () {
     const [rows] = await pool.execute(`
       SELECT 
         ROUND((COUNT(vie_b) / COUNT(*)) * 100, 2) as stat_short,
-        ROUND((COUNT(vie) / COUNT(*)) * 100, 2) as stat_long,
+        ROUND((COUNT(vie_l) / COUNT(*)) * 100, 2) as stat_long,
         ROUND((COUNT(img) / COUNT(*)) * 100, 2) as stat_img
       FROM vies
     `)
