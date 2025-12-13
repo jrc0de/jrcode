@@ -13,7 +13,7 @@
     </h2>
     <ul>
         <li><code>git init</code> – Commencer un nouveau dépôt</li>
-        <li><code>git clone &lt;repository_url&gt;</code> – Cloner un dépôt</li>
+        <li><code>git clone &lt;url&gt;</code> – Cloner un dépôt</li>
         <li><code>git reset HEAD~x</code> – Annuler les x derniers commits (garde les modifications)</li>
         <li><code>git reset --hard HEAD~x</code> – Annuler les x derniers commits (supprime les modifications)</li>
     </ul>
@@ -30,7 +30,7 @@
     </h2>
     <ul>
         <li><code>node -v</code> – Vérifier la version de Node</li>
-        <li><code>node fichier.js</code> – Exécuter un script</li>
+        <li><code>node file.js</code> – Exécuter un script</li>
         <li><code>npm init</code> – Initialiser un projet Node</li>
     </ul>
 
