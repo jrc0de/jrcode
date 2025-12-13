@@ -13,7 +13,9 @@
     </h2>
     <ul>
         <li><code>git init</code> – Commencer un nouveau dépôt</li>
-        <li><code>git clone &lt;url_du_repo&gt;</code> – Cloner un dépôt</li>
+        <li><code>git clone &lt;repository_url&gt;</code> – Cloner un dépôt</li>
+        <li><code>git reset HEAD~x</code> – Annuler les x derniers commits (garde les modifications)</li>
+        <li><code>git reset --hard HEAD~x</code> – Annuler les x derniers commits (supprime les modifications)</li>
     </ul>
 
     <h2>🟢 Node.js
@@ -28,8 +30,8 @@
     </h2>
     <ul>
         <li><code>node -v</code> – Vérifier la version de Node</li>
-        <li><code>node fichier.js</code> – Exécuter un script JavaScript</li>
-        <li><code>npm init</code> – Initialiser un projet Node avec npm</li>
+        <li><code>node fichier.js</code> – Exécuter un script</li>
+        <li><code>npm init</code> – Initialiser un projet Node</li>
     </ul>
 
     <h2>📦 npm
@@ -69,11 +71,11 @@
     <ul>
         <li><code>cd &lt;path&gt;</code> – Changer de répertoire</li>
         <li><code>mkdir &lt;folder&gt;</code> – Créer un dossier</li>
-        <li><code>code .</code> – Ouvrir VS Code dans le dossier actuel</li>
+        <li><code>code .</code> – Ouvrir un éditeur de code dans le dossier actuel</li>
         <li><code>clear</code> – Vider la console</li>
         <li><code>tree</code> – Arborescence des dossiers</li>
         <li><code>tree /F</code> – Arborescence des dossiers et fichiers</li>
-        <li><code>curl &lt;url&gt;</code> – Requête HTTP/HTTPS en GET</li>
+        <li><code>curl &lt;url&gt;</code> – Requête HTTP en GET</li>
         <li><code>curl -o &lt;file.ext&gt; &lt;url&gt;</code> – Récupérer le contenu de la requête dans un fichier</li>
     </ul>
 
