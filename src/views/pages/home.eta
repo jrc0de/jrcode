@@ -29,8 +29,8 @@
         </a>
     </h2>
     <ul>
-        <li><code>node -v</code> – Vérifier la version de Node</li>
-        <li><code>node file.js</code> – Exécuter un script</li>
+        <li><code>node -v</code> – Afficher la version de Node</li>
+        <li><code>node script.js</code> – Exécuter un script</li>
         <li><code>npm init</code> – Initialiser un projet Node</li>
     </ul>
 
@@ -46,14 +46,15 @@
         </a>
     </h2>
     <ul>
+        <li><code>npm install</code> ou <code>npm i</code> – Installer les dépendances d'un projet</li>
         <li><code>npm install &lt;package&gt;</code> ou <code>npm i &lt;package&gt;</code> – Installer un package</li>
-        <li><code>npm install &lt;package&gt; --save-dev</code> ou <code>npm i &lt;package&gt; -D</code> – Installer un package en devDependencies</li>
+        <li><code>npm install &lt;package&gt; --save-dev</code> ou <code>npm i &lt;package&gt; -D</code> – Installer un package en dépendance de développement</li>
         <li><code>npm uninstall &lt;package&gt;</code> ou <code>npm r &lt;package&gt;</code> – Désinstaller un package</li>
         <li><code>npm outdated</code> – Lister les packages obsolètes</li>
-        <li><code>npm update</code> – Mettre à jour les packages (sans changer de version majeure)</li>
+        <li><code>npm update</code> – Mettre à jour les packages obsolètes (sans changer de version majeure)</li>
         <li><code>npm install &lt;package&gt;@latest</code> – Installer ou forcer la dernière version d'un package</li>
         <li><code>npm audit</code> – Scanner les vulnérabilités de sécurité</li>
-        <li><code>npm audit fix</code> – Corriger automatiquement les vulnérabilités</li>
+        <li><code>npm audit fix</code> – Corriger les vulnérabilités de sécurité</li>
         <li><code>npm run &lt;script&gt;</code> – Exécuter un script défini dans package.json</li>
     </ul>
 
