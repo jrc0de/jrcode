@@ -16,6 +16,7 @@
         <li><code>git clone &lt;url&gt;</code> – Cloner un dépôt</li>
         <li><code>git reset HEAD~x</code> – Annuler les x derniers commits (garde les modifications)</li>
         <li><code>git reset --hard HEAD~x</code> – Annuler les x derniers commits (supprime les modifications)</li>
+        <li><code>git push --force</code> – Forcer le push (écrase l'historique distant)</li>
     </ul>
 
     <h2>🟢 Node.js
