@@ -20,6 +20,7 @@
             <ul>
                 <li><a href="/">JRDoc</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/editor">Editeur</a></li>
                 <li><a href="/rss">RSS</a></li>
                 <li><a href="https://github.com/JacquesRaoult" target="_blank" rel="noopener noreferrer"
                         aria-label="GitHub">

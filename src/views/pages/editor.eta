@@ -1,0 +1,98 @@
+<%~ include("../partials/header.eta") %>
+
+<style>
+    .terminal-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        height: calc(100vh - 200px);
+        margin-top: 2rem;
+    }
+    
+    .terminal-panel {
+        background: var(--code-background-color, #1a1a1a);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        overflow: auto;
+    }
+    
+    .terminal-panel h3 {
+        margin-top: 0;
+        color: var(--primary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    
+    #input-area {
+        width: 100%;
+        min-height: 300px;
+        background: transparent;
+        border: 1px solid var(--form-element-border-color);
+        color: var(--color);
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        resize: vertical;
+    }
+    
+    #output-area {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #007A50;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        line-height: 1.5;
+    }
+    
+    .prompt {
+        color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+        .terminal-container {
+            grid-template-columns: 1fr;
+            height: auto;
+        }
+    }
+</style>
+
+<div class="terminal-container">
+    <div class="terminal-panel">
+        <h3>💻 Entrée</h3>
+        <textarea id="input-area" placeholder="Tapez votre texte ici..."></textarea>
+    </div>
+    
+    <div class="terminal-panel">
+        <h3>📺 Sortie</h3>
+        <div id="output-area"><span class="prompt">~</span> En attente de saisie...</div>
+    </div>
+</div>
+
+<script>
+    const inputArea = document.getElementById('input-area');
+    const outputArea = document.getElementById('output-area');
+    
+    inputArea.addEventListener('input', function() {
+        const text = this.value;
+        
+        if (text.trim() === '') {
+            outputArea.innerHTML = '<span class="prompt">~</span> En attente de saisie...';
+        } else {
+            const lines = text.split('\n');
+            const formattedOutput = lines.map(line => {
+                return `<span class="prompt">~</span> ${escapeHtml(line)}`;
+            }).join('\n');
+            
+            outputArea.innerHTML = formattedOutput;
+        }
+    });
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+</script>
+
+<%~ include("../partials/footer.eta") %>
