@@ -1,404 +1,409 @@
 <%~ include("../partials/header.eta") %>
 
-<style>
-  .toolbar {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
+    <style>
+        .toolbar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
 
-  .toolbar .separator {
-    width: 1px;
-    background: var(--pico-muted-border-color);
-    margin: 0 0.25rem;
-  }
+        .toolbar .separator {
+            width: 1px;
+            background: var(--pico-muted-border-color);
+            margin: 0 0.25rem;
+        }
 
-  textarea, .selection-area, .preview-output {
-    font-family: 'Courier New', 'Consolas', monospace;
-  }
+        textarea,
+        .selection-area,
+        .preview-output {
+            font-family: 'Courier New', 'Consolas', monospace;
+        }
 
-  .selection-area {
-    font-size: 1.75rem;
-    line-height: 2.5;
-    padding: 1.5rem;
-    background: var(--pico-background-color);
-    border: 1px solid var(--pico-muted-border-color);
-    border-radius: var(--pico-border-radius);
-    min-height: 150px;
-    user-select: none;
-    cursor: text;
-  }
+        .selection-area {
+            font-size: 1.75rem;
+            line-height: 2.5;
+            padding: 1.5rem;
+            background: var(--pico-background-color);
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+            min-height: 150px;
+            user-select: none;
+            cursor: text;
+        }
 
-  .char {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.1s;
-    border-radius: 2px;
-  }
+        .char {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.1s;
+            border-radius: 2px;
+        }
 
-  .char:hover {
-    background: var(--pico-primary-hover-background);
-  }
+        .char:hover {
+            background: var(--pico-primary-hover-background);
+        }
 
-  .char.selected {
-    background: var(--pico-primary-background);
-    color: var(--pico-primary-inverse);
-  }
+        .char.selected {
+            background: var(--pico-primary-background);
+            color: var(--pico-primary-inverse);
+        }
 
-  .char.annotated.selected {
-    background: var(--pico-primary-background);
-    color: var(--pico-primary-inverse);
-    outline: 2px solid var(--pico-contrast);
-  }
+        .char.annotated.selected {
+            background: var(--pico-primary-background);
+            color: var(--pico-primary-inverse);
+            outline: 2px solid var(--pico-contrast);
+        }
 
-  .char.annotated {
-    background: color-mix(in srgb, var(--pico-primary-background) 20%, transparent);
-  }
+        .char.annotated {
+            background: color-mix(in srgb, var(--pico-primary-background) 20%, transparent);
+        }
 
-  .whitespace {
-    white-space: pre;
-    cursor: default;
-    pointer-events: none;
-  }
+        .whitespace {
+            white-space: pre;
+            cursor: default;
+            pointer-events: none;
+        }
 
-  .preview-output {
-    font-size: 1.75rem;
-    line-height: 2.5;
-    padding: 1.5rem;
-    background: var(--pico-background-color);
-    border: 1px solid var(--pico-muted-border-color);
-    border-radius: var(--pico-border-radius);
-    min-height: 100px;
-    margin-top: 1rem;
-  }
+        .preview-output {
+            font-size: 1.75rem;
+            line-height: 2.5;
+            padding: 1.5rem;
+            background: var(--pico-background-color);
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+            min-height: 100px;
+            margin-top: 1rem;
+        }
 
-  /* Styles Ruby */
-  ruby { 
-    position: relative;
-    display: inline-block;
-  }
-  
-  rt { 
-    visibility: hidden;
-    font-size: 0;
-  }
-  
-  ruby.median::before {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: currentColor;
-  }
-  
-  ruby.flexe::before {
-    content: '';
-    position: absolute;
-    top: -0.33em;
-    left: 50%;
-    width: 2px;
-    height: 0.5em;
-    background: currentColor;
-    transform: translateX(-50%);
-  }
-  
-  ruby.flexe::after {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 50%;
-    width: 0.5em;
-    height: 2px;
-    background: currentColor;
-    transform: translateX(-50%) translateY(-0.075em);
-  }
-  
-  ruby.montant::before {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 0;
-    width: 0.7em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: left center;
-    transform: rotate(-45deg);
-  }
-  
-  ruby.descendant::before {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 0;
-    width: 0.7em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: left center;
-    transform: rotate(45deg);
-  }
+        /* Styles Ruby */
+        ruby {
+            position: relative;
+            display: inline-block;
+        }
 
-  ruby.chevron::before {
-    content: '';
-    position: absolute;
-    top: 0.2em;
-    left: 50%;
-    width: 0.5em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: right center;
-    transform: translateX(-100%) rotate(55deg);
-  }
+        rt {
+            visibility: hidden;
+            font-size: 0;
+        }
 
-  ruby.chevron::after {
-    content: '';
-    position: absolute;
-    top: 0.2em;
-    left: 50%;
-    width: 0.5em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: left center;
-    transform: rotate(-55deg);
-  }
-</style>
+        ruby.median::before {
+            content: '';
+            position: absolute;
+            top: -0.05em;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: currentColor;
+        }
+
+        ruby.flexe::before {
+            content: '';
+            position: absolute;
+            top: -0.33em;
+            left: 50%;
+            width: 2px;
+            height: 0.5em;
+            background: currentColor;
+            transform: translateX(-50%);
+        }
+
+        ruby.flexe::after {
+            content: '';
+            position: absolute;
+            top: -0.05em;
+            left: 50%;
+            width: 0.5em;
+            height: 2px;
+            background: currentColor;
+            transform: translateX(-50%) translateY(-0.075em);
+        }
+
+        ruby.montant::before {
+            content: '';
+            position: absolute;
+            top: -0.05em;
+            left: 0;
+            width: 0.7em;
+            height: 2px;
+            background: currentColor;
+            transform-origin: left center;
+            transform: rotate(-45deg);
+        }
+
+        ruby.descendant::before {
+            content: '';
+            position: absolute;
+            top: -0.05em;
+            left: 0;
+            width: 0.7em;
+            height: 2px;
+            background: currentColor;
+            transform-origin: left center;
+            transform: rotate(45deg);
+        }
+
+        ruby.chevron::before {
+            content: '';
+            position: absolute;
+            top: 0.2em;
+            left: 50%;
+            width: 0.5em;
+            height: 2px;
+            background: currentColor;
+            transform-origin: right center;
+            transform: translateX(-100%) rotate(55deg);
+        }
+
+        ruby.chevron::after {
+            content: '';
+            position: absolute;
+            top: 0.2em;
+            left: 50%;
+            width: 0.5em;
+            height: 2px;
+            background: currentColor;
+            transform-origin: left center;
+            transform: rotate(-55deg);
+        }
+    </style>
 
     <hgroup>
-      <h1>✍️ Éditeur pour notation bâtonnets</h1>
-      <p>Sélectionnez des lettres ou groupes de lettres pour leur appliquer des annotations</p>
+        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v1.0</kbd></h1>
     </hgroup>
 
-    <div class="toolbar">
-      <button onclick="applyStyle('median')">━ Médian</button>
-      <button onclick="applyStyle('flexe')">✚ Flexe</button>
-      <button onclick="applyStyle('montant')">⟋ Montant</button>
-      <button onclick="applyStyle('descendant')">⟍ Descendant</button>
-      <button onclick="applyStyle('chevron')">∨ Chevron</button>
-      <div class="separator"></div>
-      <button onclick="removeStyle()" class="secondary">🗑️ Retirer annotation</button>
-      <button onclick="clearAll()" class="contrast">⟲ Réinitialiser</button>
-    </div>
-
     <article>
-      <header><strong>1. Saisissez votre texte</strong></header>
-      <textarea id="textInput" rows="5" placeholder="Saisissez votre texte ici..."></textarea>
-      
-      <aside>
-        💡 <strong>Mode d'emploi :</strong> 
-        <br>• Cliquez sur une lettre ou groupe de lettres pour les sélectionner
-        <br>• Les lettres annotées apparaissent en bleu clair
-      </aside>
+        💡 <strong>Mode d'emploi :</strong>
+        <br>• Saisissez du texte brut dans le panneau 1
+        <br>• Cliquez sur une lettre ou groupe de lettres à formater dans le panneau 2
+        <br>• Appliquer une mise en forme en choisissanr un type de notation bâtonnets
+        <br>• Prévisualisez le résultat dans le panneau 3
+        <br>• Exportez au format HTML
     </article>
 
     <article>
-      <header><strong>2. Cliquez pour sélectionner des lettres</strong></header>
-      <div class="selection-area" id="selectionArea"></div>
+        <header><strong>1. Saisissez du texte brut</strong></header>
+        <textarea id="textInput" rows="5" placeholder="Saisissez votre texte ici..."></textarea>
     </article>
 
     <article>
-      <header><strong>3. Prévisualisation finale</strong></header>
-      <div class="preview-output" id="preview"></div>
+        <header><strong>2. Cliquez pour sélectionner des lettres puis les mettre en forme</strong></header>
+        <aside>
+            <div class="toolbar">
+                <button onclick="applyStyle('median')">━ Médian</button>
+                <button onclick="applyStyle('flexe')">✚ Flexe</button>
+                <button onclick="applyStyle('montant')">⟋ Montant</button>
+                <button onclick="applyStyle('descendant')">⟍ Descendant</button>
+                <button onclick="applyStyle('chevron')">∨ Chevron</button>
+                <div class="separator"></div>
+                <button onclick="removeStyle()" class="secondary">🗑️ Retirer annotation</button>
+                <button onclick="clearAll()" class="contrast">⟲ Réinitialiser</button>
+            </div>
+        </aside>
+        <div class="selection-area" id="selectionArea"></div>
     </article>
 
     <article>
-      <header><strong>Exporter votre texte</strong></header>
-      <div class="grid">
-        <button onclick="copyHTML()">📋 Copier le HTML</button>
-        <button onclick="downloadHTML()" class="secondary">💾 Télécharger le HTML</button>
-      </div>
+        <header><strong>3. Prévisualisation finale</strong></header>
+        <div class="preview-output" id="preview"></div>
     </article>
 
-  <script>
-    let text = '';
-    let annotations = {};
-    let selectedIndices = new Set();
-    let lastSelectedIndex = null;
+    <article>
+        <header><strong>Exporter votre texte</strong></header>
+        <div class="grid">
+            <button onclick="copyHTML()">📋 Copier le HTML</button>
+            <button onclick="downloadHTML()" class="secondary">💾 Télécharger le HTML</button>
+        </div>
+    </article>
 
-    const textInput = document.getElementById('textInput');
-    const selectionArea = document.getElementById('selectionArea');
-    const preview = document.getElementById('preview');
+    <script>
+        let text = '';
+        let annotations = {};
+        let selectedIndices = new Set();
+        let lastSelectedIndex = null;
 
-    function parseText() {
-      text = textInput.value;
-      annotations = {};
-      selectedIndices.clear();
-      lastSelectedIndex = null;
-      renderSelectionArea();
-      updatePreview();
-    }
+        const textInput = document.getElementById('textInput');
+        const selectionArea = document.getElementById('selectionArea');
+        const preview = document.getElementById('preview');
 
-    function renderSelectionArea() {
-      selectionArea.innerHTML = '';
-      
-      // Créer un Set de tous les indices annotés
-      const annotatedIndices = new Set();
-      for (const key in annotations) {
-        annotations[key].indices.forEach(idx => annotatedIndices.add(idx));
-      }
-      
-      for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-        
-        if (char === '\n') {
-          selectionArea.appendChild(document.createElement('br'));
-          continue;
+        function parseText() {
+            text = textInput.value;
+            annotations = {};
+            selectedIndices.clear();
+            lastSelectedIndex = null;
+            renderSelectionArea();
+            updatePreview();
         }
-        
-        const span = document.createElement('span');
-        
-        if (char === ' ') {
-          span.className = 'whitespace';
-          span.textContent = ' ';
-          selectionArea.appendChild(span);
-          continue;
+
+        function renderSelectionArea() {
+            selectionArea.innerHTML = '';
+
+            // Créer un Set de tous les indices annotés
+            const annotatedIndices = new Set();
+            for (const key in annotations) {
+                annotations[key].indices.forEach(idx => annotatedIndices.add(idx));
+            }
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+
+                if (char === '\n') {
+                    selectionArea.appendChild(document.createElement('br'));
+                    continue;
+                }
+
+                const span = document.createElement('span');
+
+                if (char === ' ') {
+                    span.className = 'whitespace';
+                    span.textContent = ' ';
+                    selectionArea.appendChild(span);
+                    continue;
+                }
+
+                span.className = 'char';
+                span.textContent = char;
+                span.dataset.index = i;
+
+                if (selectedIndices.has(i)) {
+                    span.classList.add('selected');
+                }
+
+                if (annotatedIndices.has(i)) {
+                    span.classList.add('annotated');
+                }
+
+                span.onclick = (e) => handleCharClick(i, e);
+
+                selectionArea.appendChild(span);
+            }
         }
-        
-        span.className = 'char';
-        span.textContent = char;
-        span.dataset.index = i;
-        
-        if (selectedIndices.has(i)) {
-          span.classList.add('selected');
+
+        function handleCharClick(index, event) {
+            if (selectedIndices.has(index)) {
+                selectedIndices.delete(index);
+            } else {
+                selectedIndices.add(index);
+            }
+
+            lastSelectedIndex = index;
+            renderSelectionArea();
         }
-        
-        if (annotatedIndices.has(i)) {
-          span.classList.add('annotated');
+
+        function applyStyle(style) {
+            if (selectedIndices.size === 0) {
+                alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
+                return;
+            }
+
+            const groups = [];
+            const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
+
+            let currentGroup = [sortedIndices[0]];
+            for (let i = 1; i < sortedIndices.length; i++) {
+                if (sortedIndices[i] === sortedIndices[i - 1] + 1 ||
+                    (sortedIndices[i] === sortedIndices[i - 1] + 2 && text[sortedIndices[i - 1] + 1] === ' ')) {
+                    currentGroup.push(sortedIndices[i]);
+                } else {
+                    groups.push(currentGroup);
+                    currentGroup = [sortedIndices[i]];
+                }
+            }
+            groups.push(currentGroup);
+
+            groups.forEach(group => {
+                const groupKey = group.join(',');
+                annotations[groupKey] = {
+                    indices: group,
+                    style: style
+                };
+            });
+
+            selectedIndices.clear();
+            lastSelectedIndex = null;
+            renderSelectionArea();
+            updatePreview();
         }
-        
-        span.onclick = (e) => handleCharClick(i, e);
-        
-        selectionArea.appendChild(span);
-      }
-    }
 
-    function handleCharClick(index, event) {
-      if (selectedIndices.has(index)) {
-        selectedIndices.delete(index);
-      } else {
-        selectedIndices.add(index);
-      }
-      
-      lastSelectedIndex = index;
-      renderSelectionArea();
-    }
+        function removeStyle() {
+            if (selectedIndices.size === 0) {
+                alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
+                return;
+            }
 
-    function applyStyle(style) {
-      if (selectedIndices.size === 0) {
-        alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
-        return;
-      }
-      
-      const groups = [];
-      const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
-      
-      let currentGroup = [sortedIndices[0]];
-      for (let i = 1; i < sortedIndices.length; i++) {
-        if (sortedIndices[i] === sortedIndices[i-1] + 1 || 
-            (sortedIndices[i] === sortedIndices[i-1] + 2 && text[sortedIndices[i-1] + 1] === ' ')) {
-          currentGroup.push(sortedIndices[i]);
-        } else {
-          groups.push(currentGroup);
-          currentGroup = [sortedIndices[i]];
+            const keysToDelete = [];
+            for (const key in annotations) {
+                const annotation = annotations[key];
+                const hasOverlap = annotation.indices.some(idx => selectedIndices.has(idx));
+                if (hasOverlap) {
+                    keysToDelete.push(key);
+                }
+            }
+
+            keysToDelete.forEach(key => delete annotations[key]);
+
+            selectedIndices.clear();
+            lastSelectedIndex = null;
+            renderSelectionArea();
+            updatePreview();
         }
-      }
-      groups.push(currentGroup);
-      
-      groups.forEach(group => {
-        const groupKey = group.join(',');
-        annotations[groupKey] = {
-          indices: group,
-          style: style
-        };
-      });
-      
-      selectedIndices.clear();
-      lastSelectedIndex = null;
-      renderSelectionArea();
-      updatePreview();
-    }
 
-    function removeStyle() {
-      if (selectedIndices.size === 0) {
-        alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
-        return;
-      }
-      
-      const keysToDelete = [];
-      for (const key in annotations) {
-        const annotation = annotations[key];
-        const hasOverlap = annotation.indices.some(idx => selectedIndices.has(idx));
-        if (hasOverlap) {
-          keysToDelete.push(key);
+        function clearAll() {
+            if (confirm('Voulez-vous vraiment effacer toutes les annotations ?')) {
+                annotations = {};
+                selectedIndices.clear();
+                lastSelectedIndex = null;
+                renderSelectionArea();
+                updatePreview();
+            }
         }
-      }
-      
-      keysToDelete.forEach(key => delete annotations[key]);
-      
-      selectedIndices.clear();
-      lastSelectedIndex = null;
-      renderSelectionArea();
-      updatePreview();
-    }
 
-    function clearAll() {
-      if (confirm('Voulez-vous vraiment effacer toutes les annotations ?')) {
-        annotations = {};
-        selectedIndices.clear();
-        lastSelectedIndex = null;
-        renderSelectionArea();
-        updatePreview();
-      }
-    }
+        function updatePreview() {
+            let html = '';
+            const annotationsByStart = {};
 
-    function updatePreview() {
-      let html = '';
-      const annotationsByStart = {};
-      
-      for (const key in annotations) {
-        const annotation = annotations[key];
-        const startIndex = annotation.indices[0];
-        annotationsByStart[startIndex] = annotation;
-      }
-      
-      let i = 0;
-      while (i < text.length) {
-        if (text[i] === '\n') {
-          html += '<br>';
-          i++;
-        } else if (annotationsByStart[i]) {
-          const annotation = annotationsByStart[i];
-          const textContent = annotation.indices.map(idx => text[idx]).join('');
-          html += `<ruby class="${annotation.style}">${escapeHtml(textContent)}<rt>x</rt></ruby>`;
-          i = annotation.indices[annotation.indices.length - 1] + 1;
-        } else {
-          html += escapeHtml(text[i]);
-          i++;
+            for (const key in annotations) {
+                const annotation = annotations[key];
+                const startIndex = annotation.indices[0];
+                annotationsByStart[startIndex] = annotation;
+            }
+
+            let i = 0;
+            while (i < text.length) {
+                if (text[i] === '\n') {
+                    html += '<br>';
+                    i++;
+                } else if (annotationsByStart[i]) {
+                    const annotation = annotationsByStart[i];
+                    const textContent = annotation.indices.map(idx => text[idx]).join('');
+                    html += `<ruby class="${annotation.style}">${escapeHtml(textContent)}<rt>x</rt></ruby>`;
+                    i = annotation.indices[annotation.indices.length - 1] + 1;
+                } else {
+                    html += escapeHtml(text[i]);
+                    i++;
+                }
+            }
+
+            preview.innerHTML = html;
         }
-      }
-      
-      preview.innerHTML = html;
-    }
 
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
-    function copyHTML() {
-      const html = preview.innerHTML;
-      navigator.clipboard.writeText(html).then(() => {
-        alert('✅ Code HTML copié dans le presse-papier !');
-      }).catch(() => {
-        alert('❌ Erreur lors de la copie');
-      });
-    }
+        function copyHTML() {
+            const html = preview.innerHTML;
+            navigator.clipboard.writeText(html).then(() => {
+                alert('✅ Code HTML copié dans le presse-papier !');
+            }).catch(() => {
+                alert('❌ Erreur lors de la copie');
+            });
+        }
 
-    function downloadHTML() {
-      const html = `<!DOCTYPE html>
+        function downloadHTML() {
+            const html = `<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -507,18 +512,18 @@ ${preview.innerHTML}
 </body>
 </html>`;
 
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'texte-annote.html';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'texte-annote.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
 
-    textInput.addEventListener('input', parseText);
-    parseText();
-  </script>
+        textInput.addEventListener('input', parseText);
+        parseText();
+    </script>
 
 
-<%~ include("../partials/footer.eta") %>
+    <%~ include("../partials/footer.eta") %>
