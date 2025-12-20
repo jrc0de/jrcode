@@ -90,7 +90,19 @@
         ruby.median::before {
             content: '';
             position: absolute;
+            top: 0.4em;
+            width: 0.7em;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: currentColor;
+        }
+
+        ruby.median-haut::before {
+            content: '';
+            position: absolute;
             top: -0.05em;
+            width: 0.7em;
             left: 0;
             right: 0;
             height: 2px;
@@ -100,7 +112,7 @@
         ruby.flexe::before {
             content: '';
             position: absolute;
-            top: -0.33em;
+            top: -0.05em;
             left: 50%;
             width: 2px;
             height: 0.5em;
@@ -111,72 +123,48 @@
         ruby.flexe::after {
             content: '';
             position: absolute;
-            top: -0.05em;
+            top: 0.15em;
             left: 50%;
             width: 0.5em;
             height: 2px;
             background: currentColor;
-            transform: translateX(-50%) translateY(-0.075em);
+            transform: translateX(-50%);
         }
 
         ruby.montant::before {
             content: '';
             position: absolute;
-            top: -0.05em;
-            left: 0;
+            top: 0.20em;
             width: 0.7em;
             height: 2px;
             background: currentColor;
-            transform-origin: left center;
+            transform-origin: center center;
+            transform: translateX(-55%);
             transform: rotate(-45deg);
         }
 
         ruby.descendant::before {
             content: '';
             position: absolute;
-            top: -0.05em;
-            left: 0;
+            top: 0.20em;
             width: 0.7em;
             height: 2px;
             background: currentColor;
-            transform-origin: left center;
+            transform-origin: center center;
+            transform: translateX(-50%);
             transform: rotate(45deg);
-        }
-
-        ruby.chevron::before {
-            content: '';
-            position: absolute;
-            top: 0.2em;
-            left: 50%;
-            width: 0.5em;
-            height: 2px;
-            background: currentColor;
-            transform-origin: right center;
-            transform: translateX(-100%) rotate(55deg);
-        }
-
-        ruby.chevron::after {
-            content: '';
-            position: absolute;
-            top: 0.2em;
-            left: 50%;
-            width: 0.5em;
-            height: 2px;
-            background: currentColor;
-            transform-origin: left center;
-            transform: rotate(-55deg);
         }
     </style>
 
     <hgroup>
-        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v1.3</kbd></h1>
+        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v2.0</kbd></h1>
     </hgroup>
 
     <article>
         💡 <strong>Mode d'emploi :</strong>
         <br>• Saisissez du texte brut dans le panneau 1
         <br>• Cliquez sur une lettre ou groupe de lettres à formater dans le panneau 2
-        <br>• Appliquez une mise en forme en choisissanr un type de notation bâtonnets
+        <br>• Appliquez une mise en forme en choisissant un type de notation bâtonnets
         <br>• Prévisualisez le résultat dans le panneau 3
         <br>• Exportez au format HTML
     </article>
@@ -190,11 +178,11 @@
         <header><strong>2. Cliquez pour sélectionner des lettres puis les mettre en forme</strong></header>
         <aside>
             <div class="toolbar">
-                <button onclick="applyStyle('median')">━ Médian</button>
-                <button onclick="applyStyle('flexe')">✚ Flexe</button>
+                <button onclick="applyStyle('median')"><sub>━</sub> Médian bas</button>
+                <button onclick="applyStyle('median-haut')"><sup>━</sup> Médian haut</button>
+                <button onclick="applyStyle('flexe')">+ Flexe</button>
                 <button onclick="applyStyle('montant')">⟋ Montant</button>
                 <button onclick="applyStyle('descendant')">⟍ Descendant</button>
-                <button onclick="applyStyle('chevron')">∨ Chevron</button>
                 <div class="separator"></div>
                 <button onclick="removeStyle()" class="secondary">🗑️ Retirer</button>
                 <button onclick="clearAll()" class="contrast">⟲ Réinitialiser</button>
@@ -406,95 +394,83 @@
     font-family: 'Courier New', 'Consolas', monospace;
   }
   
-  ruby { 
-    position: relative;
-    display: inline-block;
-  }
-  
-  rt { 
-    visibility: hidden;
-    font-size: 0;
-  }
-  
-  ruby.median::before {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: currentColor;
-  }
-  
-  ruby.flexe::before {
-    content: '';
-    position: absolute;
-    top: -0.33em;
-    left: 50%;
-    width: 2px;
-    height: 0.5em;
-    background: currentColor;
-    transform: translateX(-50%);
-  }
-  
-  ruby.flexe::after {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 50%;
-    width: 0.5em;
-    height: 2px;
-    background: currentColor;
-    transform: translateX(-50%) translateY(-0.075em);
-  }
-  
-  ruby.montant::before {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 0;
-    width: 0.7em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: left center;
-    transform: rotate(-45deg);
-  }
-  
-  ruby.descendant::before {
-    content: '';
-    position: absolute;
-    top: -0.05em;
-    left: 0;
-    width: 0.7em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: left center;
-    transform: rotate(45deg);
-  }
+    ruby {
+        position: relative;
+        display: inline-block;
+    }
 
-  ruby.chevron::before {
-    content: '';
-    position: absolute;
-    top: -0.3em;
-    left: 50%;
-    width: 0.5em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: right center;
-    transform: translateX(-100%) rotate(55deg);
-  }
+    rt {
+        visibility: hidden;
+        font-size: 0;
+    }
 
-  ruby.chevron::after {
-    content: '';
-    position: absolute;
-    top: -0.3em;
-    left: 50%;
-    width: 0.5em;
-    height: 2px;
-    background: currentColor;
-    transform-origin: left center;
-    transform: rotate(-55deg);
-  }
+    ruby.median::before {
+        content: '';
+        position: absolute;
+        top: 0.4em;
+        width: 0.7em;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: currentColor;
+    }
+
+    ruby.median-haut::before {
+        content: '';
+        position: absolute;
+        top: -0.05em;
+        width: 0.7em;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: currentColor;
+    }
+
+    ruby.flexe::before {
+        content: '';
+        position: absolute;
+        top: -0.05em;
+        left: 50%;
+        width: 2px;
+        height: 0.5em;
+        background: currentColor;
+        transform: translateX(-50%);
+    }
+
+    ruby.flexe::after {
+        content: '';
+        position: absolute;
+        top: 0.15em;
+        left: 50%;
+        width: 0.5em;
+        height: 2px;
+        background: currentColor;
+        transform: translateX(-50%);
+    }
+
+    ruby.montant::before {
+        content: '';
+        position: absolute;
+        top: 0.20em;
+        width: 0.7em;
+        height: 2px;
+        background: currentColor;
+        transform-origin: center center;
+        transform: translateX(-55%);
+        transform: rotate(-45deg);
+    }
+
+    ruby.descendant::before {
+        content: '';
+        position: absolute;
+        top: 0.20em;
+        width: 0.7em;
+        height: 2px;
+        background: currentColor;
+        transform-origin: center center;
+        transform: translateX(-50%);
+        transform: rotate(45deg);
+    }
 </style>
 </head>
 <body>
@@ -515,4 +491,4 @@ ${preview.innerHTML}
         parseText();
     </script>
 
-<%~ include("../partials/footer.eta") %>
+    <%~ include("../partials/footer.eta") %>
