@@ -1,0 +1,8 @@
+[phases.setup]
+aptPkgs = ['chromium', 'chromium-sandbox', 'fonts-liberation', 'fonts-noto-color-emoji']
+
+[phases.install]
+cmds = ['npm ci', 'npx playwright install --with-deps chromium']
+
+[start]
+cmd = 'node src/server.js'

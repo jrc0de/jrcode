@@ -21,7 +21,7 @@
         }
 
         .selection-area {
-            font-size: 1.75rem;
+            font-size: 1rem;
             line-height: 2.5;
             padding: 1.5rem;
             background: var(--pico-background-color);
@@ -66,7 +66,7 @@
         }
 
         .preview-output {
-            font-size: 1.75rem;
+            font-size: 1rem;
             line-height: 2.5;
             padding: 1.5rem;
             background: var(--pico-background-color);
@@ -169,7 +169,7 @@
     </style>
 
     <hgroup>
-        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v1.2</kbd></h1>
+        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v1.3</kbd></h1>
     </hgroup>
 
     <article>
@@ -196,7 +196,7 @@
                 <button onclick="applyStyle('descendant')">⟍ Descendant</button>
                 <button onclick="applyStyle('chevron')">∨ Chevron</button>
                 <div class="separator"></div>
-                <button onclick="removeStyle()" class="secondary">🗑️ Retirer annotation</button>
+                <button onclick="removeStyle()" class="secondary">🗑️ Retirer</button>
                 <button onclick="clearAll()" class="contrast">⟲ Réinitialiser</button>
             </div>
         </aside>
@@ -211,8 +211,7 @@
     <article>
         <header><strong>Exportez votre texte</strong></header>
         <div class="grid">
-            <button onclick="copyHTML()">📋 Copier le HTML</button>
-            <button onclick="downloadHTML()" class="secondary">💾 Télécharger le HTML</button>
+            <button onclick="downloadHTML()">💾 Télécharger le HTML</button>
         </div>
     </article>
 
@@ -393,15 +392,6 @@
             return div.innerHTML;
         }
 
-        function copyHTML() {
-            const html = preview.innerHTML;
-            navigator.clipboard.writeText(html).then(() => {
-                alert('✅ Code HTML copié dans le presse-papier !');
-            }).catch(() => {
-                alert('❌ Erreur lors de la copie');
-            });
-        }
-
         function downloadHTML() {
             const html = `<!DOCTYPE html>
 <html lang="fr">
@@ -525,5 +515,4 @@ ${preview.innerHTML}
         parseText();
     </script>
 
-
-    <%~ include("../partials/footer.eta") %>
+<%~ include("../partials/footer.eta") %>
