@@ -169,7 +169,7 @@
     </style>
 
     <hgroup>
-        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v1.0</kbd></h1>
+        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v1.2</kbd></h1>
     </hgroup>
 
     <article>
@@ -209,7 +209,7 @@
     </article>
 
     <article>
-        <header><strong>Exporter votre texte</strong></header>
+        <header><strong>Exportez votre texte</strong></header>
         <div class="grid">
             <button onclick="copyHTML()">📋 Copier le HTML</button>
             <button onclick="downloadHTML()" class="secondary">💾 Télécharger le HTML</button>
