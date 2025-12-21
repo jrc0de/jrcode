@@ -11,7 +11,7 @@ const __dirname = dirname(__filename)
 const eta = new Eta()
 
 const app = fastify({
-  logger: false
+  logger: true
 })
 
 app.register(fastifyView, {

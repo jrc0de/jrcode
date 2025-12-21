@@ -1,5 +1,7 @@
 <%~ include("../partials/header.eta") %>
 
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.3/dist/abcjs-basic-min.js"></script>
+
     <style>
         .toolbar {
             display: flex;
@@ -76,7 +78,6 @@
             margin-top: 1rem;
         }
 
-        /* Styles Ruby */
         ruby {
             position: relative;
             display: inline-block;
@@ -154,10 +155,27 @@
             transform: translateX(-50%);
             transform: rotate(45deg);
         }
+
+        .music-block {
+            margin: 1.5rem 0;
+        }
+
+        .music-block-preview {
+            padding: 0;
+        }
+
+        dialog {
+            max-width: 800px;
+        }
+
+        dialog textarea {
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+        }
     </style>
 
     <hgroup>
-        <h1>✍️ Éditeur pour notation bâtonnets <kbd>v2.0</kbd></h1>
+        <h1>✍️🎵 Éditeur pour notation bâtonnets + partitions <kbd>v3.0</kbd></h1>
     </hgroup>
 
     <article>
@@ -165,6 +183,7 @@
         <br>• Saisissez du texte brut dans le panneau 1
         <br>• Cliquez sur une lettre ou groupe de lettres à formater dans le panneau 2
         <br>• Appliquez une mise en forme en choisissant un type de notation bâtonnets
+        <br>• Insérez des partitions musicales avec le bouton "🎵 Ajouter une partition"
         <br>• Prévisualisez le résultat dans le panneau 3
         <br>• Exportez au format HTML
     </article>
@@ -186,6 +205,8 @@
                 <div class="separator"></div>
                 <button onclick="removeStyle()" class="secondary">🗑️ Retirer</button>
                 <button onclick="clearAll()" class="contrast">⟲ Réinitialiser</button>
+                <div class="separator"></div>
+                <button onclick="openMusicDialog()" class="outline">🎵 Ajouter une partition</button>
             </div>
         </aside>
         <div class="selection-area" id="selectionArea"></div>
@@ -203,292 +224,21 @@
         </div>
     </article>
 
-    <script>
-        let text = '';
-        let annotations = {};
-        let selectedIndices = new Set();
-        let lastSelectedIndex = null;
+    <dialog id="musicDialog">
+        <article>
+            <header>
+                <button aria-label="Close" rel="prev" onclick="closeMusicDialog()"></button>
+                <h3>🎵 Ajouter une partition ABC</h3>
+            </header>
+            <p>Saisissez votre notation ABC ci-dessous :</p>
+            <textarea id="abcInput" placeholder="X:1&#10;T:Titre de la chanson&#10;M:4/4&#10;L:1/4&#10;K:C&#10;C D E F | G2 A2 | B2 c2 | d4 |"></textarea>
+            <footer>
+                <button class="secondary" onclick="closeMusicDialog()">Annuler</button>
+                <button onclick="insertMusic()">✓ Insérer la partition</button>
+            </footer>
+        </article>
+    </dialog>
 
-        const textInput = document.getElementById('textInput');
-        const selectionArea = document.getElementById('selectionArea');
-        const preview = document.getElementById('preview');
-
-        function parseText() {
-            text = textInput.value;
-            annotations = {};
-            selectedIndices.clear();
-            lastSelectedIndex = null;
-            renderSelectionArea();
-            updatePreview();
-        }
-
-        function renderSelectionArea() {
-            selectionArea.innerHTML = '';
-
-            // Créer un Set de tous les indices annotés
-            const annotatedIndices = new Set();
-            for (const key in annotations) {
-                annotations[key].indices.forEach(idx => annotatedIndices.add(idx));
-            }
-
-            for (let i = 0; i < text.length; i++) {
-                const char = text[i];
-
-                if (char === '\n') {
-                    selectionArea.appendChild(document.createElement('br'));
-                    continue;
-                }
-
-                const span = document.createElement('span');
-
-                if (char === ' ') {
-                    span.className = 'whitespace';
-                    span.textContent = ' ';
-                    selectionArea.appendChild(span);
-                    continue;
-                }
-
-                span.className = 'char';
-                span.textContent = char;
-                span.dataset.index = i;
-
-                if (selectedIndices.has(i)) {
-                    span.classList.add('selected');
-                }
-
-                if (annotatedIndices.has(i)) {
-                    span.classList.add('annotated');
-                }
-
-                span.onclick = (e) => handleCharClick(i, e);
-
-                selectionArea.appendChild(span);
-            }
-        }
-
-        function handleCharClick(index, event) {
-            if (selectedIndices.has(index)) {
-                selectedIndices.delete(index);
-            } else {
-                selectedIndices.add(index);
-            }
-
-            lastSelectedIndex = index;
-            renderSelectionArea();
-        }
-
-        function applyStyle(style) {
-            if (selectedIndices.size === 0) {
-                alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
-                return;
-            }
-
-            const groups = [];
-            const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
-
-            let currentGroup = [sortedIndices[0]];
-            for (let i = 1; i < sortedIndices.length; i++) {
-                if (sortedIndices[i] === sortedIndices[i - 1] + 1 ||
-                    (sortedIndices[i] === sortedIndices[i - 1] + 2 && text[sortedIndices[i - 1] + 1] === ' ')) {
-                    currentGroup.push(sortedIndices[i]);
-                } else {
-                    groups.push(currentGroup);
-                    currentGroup = [sortedIndices[i]];
-                }
-            }
-            groups.push(currentGroup);
-
-            groups.forEach(group => {
-                const groupKey = group.join(',');
-                annotations[groupKey] = {
-                    indices: group,
-                    style: style
-                };
-            });
-
-            selectedIndices.clear();
-            lastSelectedIndex = null;
-            renderSelectionArea();
-            updatePreview();
-        }
-
-        function removeStyle() {
-            if (selectedIndices.size === 0) {
-                alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
-                return;
-            }
-
-            const keysToDelete = [];
-            for (const key in annotations) {
-                const annotation = annotations[key];
-                const hasOverlap = annotation.indices.some(idx => selectedIndices.has(idx));
-                if (hasOverlap) {
-                    keysToDelete.push(key);
-                }
-            }
-
-            keysToDelete.forEach(key => delete annotations[key]);
-
-            selectedIndices.clear();
-            lastSelectedIndex = null;
-            renderSelectionArea();
-            updatePreview();
-        }
-
-        function clearAll() {
-            if (confirm('Voulez-vous vraiment effacer toutes les annotations ?')) {
-                annotations = {};
-                selectedIndices.clear();
-                lastSelectedIndex = null;
-                renderSelectionArea();
-                updatePreview();
-            }
-        }
-
-        function updatePreview() {
-            let html = '';
-            const annotationsByStart = {};
-
-            for (const key in annotations) {
-                const annotation = annotations[key];
-                const startIndex = annotation.indices[0];
-                annotationsByStart[startIndex] = annotation;
-            }
-
-            let i = 0;
-            while (i < text.length) {
-                if (text[i] === '\n') {
-                    html += '<br>';
-                    i++;
-                } else if (annotationsByStart[i]) {
-                    const annotation = annotationsByStart[i];
-                    const textContent = annotation.indices.map(idx => text[idx]).join('');
-                    html += `<ruby class="${annotation.style}">${escapeHtml(textContent)}<rt>x</rt></ruby>`;
-                    i = annotation.indices[annotation.indices.length - 1] + 1;
-                } else {
-                    html += escapeHtml(text[i]);
-                    i++;
-                }
-            }
-
-            preview.innerHTML = html;
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function downloadHTML() {
-            const html = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Texte annoté</title>
-<style>
-  body {
-    font-size: 24px;
-    line-height: 2.5;
-    padding: 40px;
-    font-family: 'Courier New', 'Consolas', monospace;
-  }
-  
-    ruby {
-        position: relative;
-        display: inline-block;
-    }
-
-    rt {
-        visibility: hidden;
-        font-size: 0;
-    }
-
-    ruby.median::before {
-        content: '';
-        position: absolute;
-        top: 0.4em;
-        width: 0.7em;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: currentColor;
-    }
-
-    ruby.median-haut::before {
-        content: '';
-        position: absolute;
-        top: -0.05em;
-        width: 0.7em;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: currentColor;
-    }
-
-    ruby.flexe::before {
-        content: '';
-        position: absolute;
-        top: -0.05em;
-        left: 50%;
-        width: 2px;
-        height: 0.5em;
-        background: currentColor;
-        transform: translateX(-50%);
-    }
-
-    ruby.flexe::after {
-        content: '';
-        position: absolute;
-        top: 0.15em;
-        left: 50%;
-        width: 0.5em;
-        height: 2px;
-        background: currentColor;
-        transform: translateX(-50%);
-    }
-
-    ruby.montant::before {
-        content: '';
-        position: absolute;
-        top: 0.20em;
-        width: 0.7em;
-        height: 2px;
-        background: currentColor;
-        transform-origin: center center;
-        transform: translateX(-55%);
-        transform: rotate(-45deg);
-    }
-
-    ruby.descendant::before {
-        content: '';
-        position: absolute;
-        top: 0.20em;
-        width: 0.7em;
-        height: 2px;
-        background: currentColor;
-        transform-origin: center center;
-        transform: translateX(-50%);
-        transform: rotate(45deg);
-    }
-</style>
-</head>
-<body>
-${preview.innerHTML}
-</body>
-</html>`;
-
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'texte-annote.html';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        textInput.addEventListener('input', parseText);
-        parseText();
-    </script>
+    <script src="/js/editor-music.js"></script>
 
     <%~ include("../partials/footer.eta") %>
