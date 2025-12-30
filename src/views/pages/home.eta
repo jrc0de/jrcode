@@ -19,9 +19,9 @@
         <li><code>git push --force</code> – Forcer le push (écrase l'historique distant)</li>
         <li><code>git branch</code> – Afficher les branches locales</li>
         <li><code>git branch &lt;name&gt;</code> – Créer une branche</li>
-        <li><code>git status</code> – Afficher la branche courante</li>
         <li><code>git checkout &lt;name&gt;</code> – Changer de branche</li>
         <li><code>git merge &lt;name&gt;</code> – Fusionner une branche</li>
+        <li><code>git branch -d &lt;name&gt;</code> – Supprimer une branche locale</li>
     </ul>
 
     <h2>🟢 Node.js
