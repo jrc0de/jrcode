@@ -38,30 +38,16 @@
         <li><code>bun -v</code> – Afficher la version</li>
         <li><code>bun upgrade</code> – Mettre a jour le binaire</li>
         <li><code>bun init &lt;my-app&gt;</code> – Initialiser un nouveau projet</li>
-    </ul>
-
-    <h2>📦 npm
-        <a href="https://docs.npmjs.com/cli/v11/commands" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
-    <ul>
-        <li><code>npm install</code> ou <code>npm i</code> – Installer les dépendances d'un projet</li>
-        <li><code>npm install &lt;package&gt;</code> ou <code>npm i &lt;package&gt;</code> – Installer un package</li>
-        <li><code>npm install &lt;package&gt; --save-dev</code> ou <code>npm i &lt;package&gt; -D</code> – Installer un package en dépendance de développement</li>
-        <li><code>npm uninstall &lt;package&gt;</code> ou <code>npm r &lt;package&gt;</code> – Désinstaller un package</li>
-        <li><code>npm outdated</code> – Lister les packages obsolètes</li>
-        <li><code>npm update</code> – Mettre à jour les packages obsolètes (sans changer de version majeure)</li>
-        <li><code>npm install &lt;package&gt;@latest</code> – Installer ou forcer la dernière version d'un package</li>
-        <li><code>npm audit</code> – Scanner les vulnérabilités de sécurité</li>
-        <li><code>npm audit fix</code> – Corriger les vulnérabilités de sécurité</li>
-        <li><code>npm run &lt;script&gt;</code> – Exécuter un script défini dans package.json</li>
+        <li><code>bun install</code> – Installer les dépendances d'un projet</li>
+        <li><code>bun add &lt;package&gt;</code> – Installer un package</li>
+        <li><code>bun add &lt;package&gt; -d</code> – Installer un package en dépendance de développement</li>
+        <li><code>bun remove &lt;package&gt;</code> ou <code>bun r &lt;package&gt;</code> – Désinstaller un package</li>
+        <li><code>bun outdated</code> – Lister les packages obsolètes</li>
+        <li><code>bun update</code> – Mettre à jour les packages obsolètes (sans changer de version majeure)</li>
+        <li><code>bun install &lt;package&gt;@latest</code> – Installer ou forcer la dernière version d'un package</li>
+        <li><code>bun &lt;script&gt;</code> – Exécuter un script</li>
+        <li><code>bun audit</code> – Scanner les vulnérabilités de sécurité</li>
+        <li><code>bun audit fix</code> – Corriger les vulnérabilités de sécurité</li>
     </ul>
 
     <h2>💻 PowerShell
