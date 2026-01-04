@@ -102,7 +102,7 @@
         <li><code>capacitor add ios</code> – Ajouter le support iOS</li>
     </ul>
 
-    <h2><img src="img/powershell.png" alt="PowerShell" class="icon-inline" /> PowerShell
+    <h2><img src="img/ps.png" alt="PowerShell" class="icon-inline" /> PowerShell
         <a href="https://learn.microsoft.com/fr-fr/powershell/" target="_blank"
             style="display:inline-flex; align-items:center; gap:4px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
