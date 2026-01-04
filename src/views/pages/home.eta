@@ -1,6 +1,6 @@
 <%~ include("../partials/header.eta") %>
 
-    <h2><img src="img/git.png" alt="Git" class="icon-inline" /> Git
+    <h2><img src="img/git.svg" alt="Git" class="icon-inline" /> Git
         <a href="https://git-scm.com/cheat-sheet" target="_blank"
             style="display:inline-flex; align-items:center; gap:4px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
