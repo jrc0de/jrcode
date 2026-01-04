@@ -1,6 +1,6 @@
 <%~ include("../partials/header.eta") %>
 
-    <h2>🐙 Git
+    <h2><img src="img/git.png" alt="Git" class="icon-inline" /> Git
         <a href="https://git-scm.com/cheat-sheet" target="_blank"
             style="display:inline-flex; align-items:center; gap:4px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -24,7 +24,7 @@
         <li><code>git branch -d &lt;name&gt;</code> – Supprimer une branche locale</li>
     </ul>
 
-        <h2>🍞 Bun
+        <h2><img src="img/bun.png" alt="Git" class="icon-inline" /> Bun
         <a href="https://bun.sh/docs/runtime" target="_blank" style="display:inline-flex; align-items:center; gap:4px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -50,7 +50,7 @@
         <li><code>bun audit fix</code> – Corriger les vulnérabilités de sécurité</li>
     </ul>
 
-    <h2>💻 PowerShell
+    <h2><img src="img/PowerShell.png" alt="Git" class="icon-inline" /> PowerShell
         <a href="https://learn.microsoft.com/fr-fr/powershell/" target="_blank"
             style="display:inline-flex; align-items:center; gap:4px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
