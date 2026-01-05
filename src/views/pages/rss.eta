@@ -23,8 +23,8 @@
             </svg>
         </a>
     </h3>
-    <h6 style="font-family:monospace;">https://www.jrcode.name/rss/feed1</h6>
-    <button onclick="navigator.clipboard.writeText(`https://www.jrcode.name/rss/feed1`)">📋 Copier l'URL</button>
+    <h6 style="font-family:monospace;">https://www.jrcode.cloud/rss/feed1</h6>
+    <button onclick="navigator.clipboard.writeText(`https://www.jrcode.cloud/rss/feed1`)">📋 Copier l'URL</button>
 </article>
 
 <article>
@@ -41,8 +41,8 @@
             </svg>
         </a>
     </h3>
-    <h6 style="font-family:monospace;">https://www.jrcode.name/rss/feed2</h6>
-    <button onclick="navigator.clipboard.writeText(`https://www.jrcode.name/rss/feed2`)">📋 Copier l'URL</button>
+    <h6 style="font-family:monospace;">https://www.jrcode.cloud/rss/feed2</h6>
+    <button onclick="navigator.clipboard.writeText(`https://www.jrcode.cloud/rss/feed2`)">📋 Copier l'URL</button>
 </article>
 
 <%~ include("../partials/footer.eta") %>
