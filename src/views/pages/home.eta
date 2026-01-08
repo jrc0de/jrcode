@@ -63,9 +63,9 @@
         </a>
     </h2>
     <ul>
-        <li><code>npm create vue@latest</code> – Créer un nouveau projet</li>
-        <li><code>npm run dev</code> – Lancer le serveur de développement</li>
-        <li><code>npm run build</code> – Construire le projet</li>
+        <li><code>bun create vue@latest</code> – Créer un nouveau projet</li>
+        <li><code>bun run dev</code> – Lancer le serveur de développement</li>
+        <li><code>bun run build</code> – Construire le projet</li>
     </ul>
 
     <h2><img src="img/ionic.svg" alt="Ionic" class="icon-inline" /> Ionic
