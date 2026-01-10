@@ -13,7 +13,8 @@
     </h2>
     <ul>
         <li><code>git init</code> – Commencer un nouveau dépôt</li>
-        <li><code>git clone &lt;url&gt;</code> – Cloner un dépôt</li>
+        <li><code>git clone &lt;url&gt;</code> – Cloner un dépôt distant</li>
+        <li><code>git pull</code> – Récupérer les modifications depuis le dépôt distant</li>
         <li><code>git reset HEAD~x</code> – Annuler les x derniers commits (garde les modifications)</li>
         <li><code>git reset --hard HEAD~x</code> – Annuler les x derniers commits (supprime les modifications)</li>
         <li><code>git push --force</code> – Forcer le push (écrase l'historique distant)</li>
