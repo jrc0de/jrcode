@@ -1,20 +1,11 @@
 <%~ include("../partials/header.eta") %>
 
-    <h2><img src="img/git.svg" alt="Git" class="icon-inline" /> Git
-        <a href="https://git-scm.com/cheat-sheet" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
+    <h2><img src="img/git.svg" alt="Git" class="icon-inline" /> Git</h2>
     <ul>
         <li><code>git init</code> – Commencer un nouveau dépôt</li>
         <li><code>git clone &lt;url&gt;</code> – Cloner un dépôt distant</li>
-        <li><code>git pull</code> – Récupérer les modifications depuis le dépôt distant</li>
+        <li><code>git fetch</code> – <li><code>git fetch</code> – Récupérer les modifications du dépôt distant</li></li>
+        <li><code>git pull</code> – Récupérer et fusionner les modifications du dépôt distant</li>
         <li><code>git reset HEAD~x</code> – Annuler les x derniers commits (garde les modifications)</li>
         <li><code>git reset --hard HEAD~x</code> – Annuler les x derniers commits (supprime les modifications)</li>
         <li><code>git push --force</code> – Forcer le push (écrase l'historique distant)</li>
@@ -25,17 +16,7 @@
         <li><code>git branch -d &lt;name&gt;</code> – Supprimer une branche locale</li>
     </ul>
 
-    <h2><img src="img/bun.svg" alt="bun" class="icon-inline" /> bun
-        <a href="https://bun.com/docs/pm/cli/install" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
+    <h2><img src="img/bun.svg" alt="bun" class="icon-inline" /> bun</h2>
     <ul>
         <li><code>bun -v</code> – Afficher la version</li>
         <li><code>bun upgrade</code> – Mettre à jour Bun vers la dernière version</li>
@@ -52,34 +33,14 @@
         <li><code>bun audit fix</code> – Corriger les vulnérabilités de sécurité</li>
     </ul>
 
-    <h2><img src="img/vuejs.png" alt="Vue.js" class="icon-inline" /> Vue.js
-        <a href="https://vuejs.org/guide/introduction.html" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
+    <h2><img src="img/vuejs.png" alt="Vue.js" class="icon-inline" /> Vue.js</h2>
     <ul>
         <li><code>bun create vue@latest</code> – Créer un nouveau projet</li>
         <li><code>bun run dev</code> – Lancer le serveur de développement</li>
         <li><code>bun run build</code> – Construire le projet</li>
     </ul>
 
-    <h2><img src="img/ionic.svg" alt="Ionic" class="icon-inline" /> Ionic
-        <a href="https://ionicframework.com/docs/" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
+    <h2><img src="img/ionic.svg" alt="Ionic" class="icon-inline" /> Ionic</h2>
     <ul>
         <li><code>npm install -g @ionic/cli</code> – Installer la dernière version du CLI Ionic</li>
         <li><code>ionic start &lt;myApp&gt; blank --type vue</code> – Créer un nouveau projet Ionic avec Vue.js</li>
@@ -87,17 +48,7 @@
         <li><code>npm run build</code> – Build l'application web</li>
     </ul>
 
-    <h2><img src="img/capacitor.svg" alt="Capacitor" class="icon-inline" /> Capacitor
-        <a href="https://capacitorjs.com/docs" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
+    <h2><img src="img/capacitor.svg" alt="Capacitor" class="icon-inline" /> Capacitor</h2>
     <ul>
         <li><code>npm install -g @capacitor/cli</code> – Installer la dernière version du CLI Capacitor</li>
         <li><code>npx cap add android</code> – Créer le projet Android natif</li>
@@ -107,20 +58,11 @@
         <li><code>npx cap open ios</code> – Ouvrir le projet iOS dans Xcode</li>
     </ul>
 
-    <h2><img src="img/powershell.png" alt="PowerShell" class="icon-inline" /> PowerShell
-        <a href="https://learn.microsoft.com/fr-fr/powershell/" target="_blank"
-            style="display:inline-flex; align-items:center; gap:4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="#00CC88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            </svg>
-        </a>
-    </h2>
+    <h2><img src="img/alacritty.png" alt="Alacritty" class="icon-inline" /> Shell</h2>
     <ul>
         <li><code>cd &lt;path&gt;</code> – Changer de répertoire</li>
         <li><code>mkdir &lt;folder&gt;</code> – Créer un dossier</li>
+        <li><code>touch &lt;file.ext&gt;</code> – Créer un fichier</li>
         <li><code>code .</code> – Ouvrir un éditeur de code dans le dossier actuel</li>
         <li><code>clear</code> – Vider la console</li>
         <li><code>tree</code> – Arborescence des dossiers</li>
@@ -128,4 +70,5 @@
         <li><code>curl &lt;url&gt;</code> – Requête HTTP en GET</li>
         <li><code>curl -o &lt;file.ext&gt; &lt;url&gt;</code> – Récupérer le contenu de la requête dans un fichier</li>
     </ul>
-    <%~ include("../partials/footer.eta") %>
+
+<%~ include("../partials/footer.eta") %>
