@@ -4,7 +4,7 @@
     <ul>
         <li><code>git init</code> – Commencer un nouveau dépôt</li>
         <li><code>git clone &lt;url&gt;</code> – Cloner un dépôt distant</li>
-        <li><code>git fetch</code> – <li><code>git fetch</code> – Récupérer les modifications du dépôt distant</li></li>
+        <li><code>git fetch</code> – Récupérer les modifications du dépôt distant</li>
         <li><code>git pull</code> – Récupérer et fusionner les modifications du dépôt distant</li>
         <li><code>git reset HEAD~x</code> – Annuler les x derniers commits (garde les modifications)</li>
         <li><code>git reset --hard HEAD~x</code> – Annuler les x derniers commits (supprime les modifications)</li>
