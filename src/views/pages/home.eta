@@ -61,6 +61,8 @@
     <h2><img src="img/alacritty.png" alt="Alacritty" class="icon-inline" /> Shell</h2>
     <ul>
         <li><code>cd &lt;path&gt;</code> – Changer de répertoire</li>
+        <li><code>cd -</code> – Revenir au dossier précédent</li>
+        <li><code>cd ..</code> – Aller au dossier parent</li>
         <li><code>mkdir &lt;folder&gt;</code> – Créer un dossier</li>
         <li><code>touch &lt;file.ext&gt;</code> – Créer un fichier</li>
         <li><code>code .</code> – Ouvrir un éditeur de code dans le dossier actuel</li>
