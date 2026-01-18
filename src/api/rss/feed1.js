@@ -1,5 +1,7 @@
-import axios from "axios"
+import { Hono } from "hono"
 import * as cheerio from "cheerio"
+
+const app = new Hono()
 
 // Cache en mémoire
 const cache = {
@@ -20,7 +22,7 @@ async function scrapeOrthodoxieVideos() {
     console.log("🔄 Cache Orthodoxie expiré ou vide, récupération des données...")
 
     try {
-        const { data: html } = await axios.get("https://www.france.tv/france-2/orthodoxie/toutes-les-videos/", {
+        const response = await fetch("https://www.france.tv/france-2/orthodoxie/toutes-les-videos/", {
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
                 Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -28,9 +30,10 @@ async function scrapeOrthodoxieVideos() {
                 Referer: "https://www.france.tv/",
                 Connection: "keep-alive",
             },
-            timeout: 15000,
+            signal: AbortSignal.timeout(15000),
         })
 
+        const html = await response.text()
         const $ = cheerio.load(html)
         const videos = []
 
@@ -139,11 +142,17 @@ function generateRSSFromVideos(videos) {
 </rss>`
 }
 
-export default async function (fastify, opts) {
-    fastify.get("/feed1", async (request, reply) => {
-        console.log(`📥 Requête /feed2 - IP: ${request.ip} - UA: ${request.headers["user-agent"]?.substring(0, 50)}...`)
-        const videos = await scrapeOrthodoxieVideos()
-        const rss = generateRSSFromVideos(videos)
-        return reply.type("application/rss+xml; charset=utf-8").send(rss)
+app.get("/rss/feed1", async (c) => {
+    const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown"
+    const userAgent = c.req.header("user-agent")?.substring(0, 50) || "unknown"
+    console.log(`📥 Requête /feed1 - IP: ${ip} - UA: ${userAgent}...`)
+
+    const videos = await scrapeOrthodoxieVideos()
+    const rss = generateRSSFromVideos(videos)
+
+    return c.text(rss, 200, {
+        "Content-Type": "application/rss+xml; charset=utf-8",
     })
-}
+})
+
+export default app

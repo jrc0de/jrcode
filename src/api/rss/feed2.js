@@ -1,4 +1,7 @@
+import { Hono } from "hono"
 import * as cheerio from "cheerio"
+
+const app = new Hono()
 
 // Cache en mémoire
 const cache = {
@@ -174,12 +177,17 @@ function generateRSSFromVideos(videos) {
 </rss>`
 }
 
-// Route Fastify pour le flux RSS
-export default async function (fastify, opts) {
-    fastify.get("/feed2", async (request, reply) => {
-        console.log(`📥 Requête /feed2 - IP: ${request.ip} - UA: ${request.headers["user-agent"]?.substring(0, 50)}...`)
-        const videos = await scrapeVaquiVideos()
-        const rss = generateRSSFromVideos(videos)
-        return reply.type("application/rss+xml; charset=utf-8").send(rss)
+app.get("/rss/feed2", async (c) => {
+    const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown"
+    const userAgent = c.req.header("user-agent")?.substring(0, 50) || "unknown"
+    console.log(`📥 Requête /feed2 - IP: ${ip} - UA: ${userAgent}...`)
+
+    const videos = await scrapeVaquiVideos()
+    const rss = generateRSSFromVideos(videos)
+
+    return c.text(rss, 200, {
+        "Content-Type": "application/rss+xml; charset=utf-8",
     })
-}
+})
+
+export default app
