@@ -1,273 +1,269 @@
-let text = '';
-let annotations = {};
-let musicBlocks = [];
-let selectedIndices = new Set();
-let lastSelectedIndex = null;
+let text = ""
+let annotations = {}
+let musicBlocks = []
+let selectedIndices = new Set()
+let lastSelectedIndex = null
 
-const textInput = document.getElementById('textInput');
-const selectionArea = document.getElementById('selectionArea');
-const preview = document.getElementById('preview');
-const musicDialog = document.getElementById('musicDialog');
-const abcInput = document.getElementById('abcInput');
+const textInput = document.getElementById("textInput")
+const selectionArea = document.getElementById("selectionArea")
+const preview = document.getElementById("preview")
+const musicDialog = document.getElementById("musicDialog")
+const abcInput = document.getElementById("abcInput")
 
 function parseText() {
-    text = textInput.value;
-    annotations = {};
-    musicBlocks = [];
-    selectedIndices.clear();
-    lastSelectedIndex = null;
-    renderSelectionArea();
-    updatePreview();
+    text = textInput.value
+    annotations = {}
+    musicBlocks = []
+    selectedIndices.clear()
+    lastSelectedIndex = null
+    renderSelectionArea()
+    updatePreview()
 }
 
 function renderSelectionArea() {
-    selectionArea.innerHTML = '';
+    selectionArea.innerHTML = ""
 
-    const annotatedIndices = new Set();
+    const annotatedIndices = new Set()
     for (const key in annotations) {
-        annotations[key].indices.forEach(idx => annotatedIndices.add(idx));
+        annotations[key].indices.forEach((idx) => annotatedIndices.add(idx))
     }
 
     for (let i = 0; i < text.length; i++) {
-        const char = text[i];
+        const char = text[i]
 
-        if (char === '\n') {
-            selectionArea.appendChild(document.createElement('br'));
-            continue;
+        if (char === "\n") {
+            selectionArea.appendChild(document.createElement("br"))
+            continue
         }
 
-        const span = document.createElement('span');
+        const span = document.createElement("span")
 
-        if (char === ' ') {
-            span.className = 'whitespace';
-            span.textContent = ' ';
-            selectionArea.appendChild(span);
-            continue;
+        if (char === " ") {
+            span.className = "whitespace"
+            span.textContent = " "
+            selectionArea.appendChild(span)
+            continue
         }
 
-        span.className = 'char';
-        span.textContent = char;
-        span.dataset.index = i;
+        span.className = "char"
+        span.textContent = char
+        span.dataset.index = i
 
         if (selectedIndices.has(i)) {
-            span.classList.add('selected');
+            span.classList.add("selected")
         }
 
         if (annotatedIndices.has(i)) {
-            span.classList.add('annotated');
+            span.classList.add("annotated")
         }
 
-        span.onclick = (e) => handleCharClick(i, e);
+        span.onclick = (e) => handleCharClick(i, e)
 
-        selectionArea.appendChild(span);
+        selectionArea.appendChild(span)
     }
 }
 
 function handleCharClick(index, event) {
     if (selectedIndices.has(index)) {
-        selectedIndices.delete(index);
+        selectedIndices.delete(index)
     } else {
-        selectedIndices.add(index);
+        selectedIndices.add(index)
     }
 
-    lastSelectedIndex = index;
-    renderSelectionArea();
+    lastSelectedIndex = index
+    renderSelectionArea()
 }
 
 function applyStyle(style) {
     if (selectedIndices.size === 0) {
-        alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
-        return;
+        alert("⚠️ Veuillez d'abord sélectionner au moins une lettre !")
+        return
     }
 
-    const groups = [];
-    const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
+    const groups = []
+    const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b)
 
-    let currentGroup = [sortedIndices[0]];
+    let currentGroup = [sortedIndices[0]]
     for (let i = 1; i < sortedIndices.length; i++) {
-        if (sortedIndices[i] === sortedIndices[i - 1] + 1 ||
-            (sortedIndices[i] === sortedIndices[i - 1] + 2 && text[sortedIndices[i - 1] + 1] === ' ')) {
-            currentGroup.push(sortedIndices[i]);
+        if (sortedIndices[i] === sortedIndices[i - 1] + 1 || (sortedIndices[i] === sortedIndices[i - 1] + 2 && text[sortedIndices[i - 1] + 1] === " ")) {
+            currentGroup.push(sortedIndices[i])
         } else {
-            groups.push(currentGroup);
-            currentGroup = [sortedIndices[i]];
+            groups.push(currentGroup)
+            currentGroup = [sortedIndices[i]]
         }
     }
-    groups.push(currentGroup);
+    groups.push(currentGroup)
 
-    groups.forEach(group => {
-        const groupKey = group.join(',');
+    groups.forEach((group) => {
+        const groupKey = group.join(",")
         annotations[groupKey] = {
             indices: group,
-            style: style
-        };
-    });
+            style: style,
+        }
+    })
 
-    selectedIndices.clear();
-    lastSelectedIndex = null;
-    renderSelectionArea();
-    updatePreview();
+    selectedIndices.clear()
+    lastSelectedIndex = null
+    renderSelectionArea()
+    updatePreview()
 }
 
 function removeStyle() {
     if (selectedIndices.size === 0) {
-        alert('⚠️ Veuillez d\'abord sélectionner au moins une lettre !');
-        return;
+        alert("⚠️ Veuillez d'abord sélectionner au moins une lettre !")
+        return
     }
 
-    const keysToDelete = [];
+    const keysToDelete = []
     for (const key in annotations) {
-        const annotation = annotations[key];
-        const hasOverlap = annotation.indices.some(idx => selectedIndices.has(idx));
+        const annotation = annotations[key]
+        const hasOverlap = annotation.indices.some((idx) => selectedIndices.has(idx))
         if (hasOverlap) {
-            keysToDelete.push(key);
+            keysToDelete.push(key)
         }
     }
 
-    keysToDelete.forEach(key => delete annotations[key]);
+    keysToDelete.forEach((key) => delete annotations[key])
 
-    selectedIndices.clear();
-    lastSelectedIndex = null;
-    renderSelectionArea();
-    updatePreview();
+    selectedIndices.clear()
+    lastSelectedIndex = null
+    renderSelectionArea()
+    updatePreview()
 }
 
 function clearAll() {
-    if (confirm('Voulez-vous vraiment effacer toutes les annotations ?')) {
-        annotations = {};
-        musicBlocks = [];
-        selectedIndices.clear();
-        lastSelectedIndex = null;
-        renderSelectionArea();
-        updatePreview();
+    if (confirm("Voulez-vous vraiment effacer toutes les annotations ?")) {
+        annotations = {}
+        musicBlocks = []
+        selectedIndices.clear()
+        lastSelectedIndex = null
+        renderSelectionArea()
+        updatePreview()
     }
 }
 
 function openMusicDialog() {
-    musicDialog.showModal();
+    musicDialog.showModal()
 }
 
 function closeMusicDialog() {
-    musicDialog.close();
-    abcInput.value = '';
+    musicDialog.close()
+    abcInput.value = ""
 }
 
 function insertMusic() {
-    const abc = abcInput.value.trim();
+    const abc = abcInput.value.trim()
     if (!abc) {
-        alert('⚠️ Veuillez saisir une notation ABC !');
-        return;
+        alert("⚠️ Veuillez saisir une notation ABC !")
+        return
     }
 
-    const id = 'music_' + Date.now();
-    musicBlocks.push({ id, abc });
-    
-    const marker = `\n[MUSIC:${id}]\n`;
-    const cursorPos = textInput.selectionStart;
-    const newText = text.slice(0, cursorPos) + marker + text.slice(cursorPos);
-    
-    text = newText;
-    textInput.value = newText;
-    
-    closeMusicDialog();
-    renderSelectionArea();
-    updatePreview();
+    const id = "music_" + Date.now()
+    musicBlocks.push({ id, abc })
+
+    const marker = `\n[MUSIC:${id}]\n`
+    const cursorPos = textInput.selectionStart
+    const newText = text.slice(0, cursorPos) + marker + text.slice(cursorPos)
+
+    text = newText
+    textInput.value = newText
+
+    closeMusicDialog()
+    renderSelectionArea()
+    updatePreview()
 }
 
 function updatePreview() {
-    let html = '';
-    const annotationsByStart = {};
+    let html = ""
+    const annotationsByStart = {}
 
     for (const key in annotations) {
-        const annotation = annotations[key];
-        const startIndex = annotation.indices[0];
-        annotationsByStart[startIndex] = annotation;
+        const annotation = annotations[key]
+        const startIndex = annotation.indices[0]
+        annotationsByStart[startIndex] = annotation
     }
 
-    let i = 0;
+    let i = 0
     while (i < text.length) {
-        if (text[i] === '\n') {
-            html += '<br>';
-            i++;
-        } else if (text.substr(i, 7) === '[MUSIC:') {
-            const endPos = text.indexOf(']', i);
+        if (text[i] === "\n") {
+            html += "<br>"
+            i++
+        } else if (text.substr(i, 7) === "[MUSIC:") {
+            const endPos = text.indexOf("]", i)
             if (endPos !== -1) {
-                const marker = text.substring(i + 1, endPos);
-                const id = marker.replace('MUSIC:', '');
-                const block = musicBlocks.find(b => b.id === id);
-                
+                const marker = text.substring(i + 1, endPos)
+                const id = marker.replace("MUSIC:", "")
+                const block = musicBlocks.find((b) => b.id === id)
+
                 if (block) {
                     html += `<div class="music-block">
                         <div class="music-block-preview" id="${id}"></div>
-                    </div>`;
+                    </div>`
                 }
-                
-                i = endPos + 1;
-                continue;
+
+                i = endPos + 1
+                continue
             }
-            i++;
+            i++
         } else if (annotationsByStart[i]) {
-            const annotation = annotationsByStart[i];
-            const textContent = annotation.indices.map(idx => text[idx]).join('');
-            html += `<ruby class="${annotation.style}">${escapeHtml(textContent)}<rt>x</rt></ruby>`;
-            i = annotation.indices[annotation.indices.length - 1] + 1;
+            const annotation = annotationsByStart[i]
+            const textContent = annotation.indices.map((idx) => text[idx]).join("")
+            html += `<ruby class="${annotation.style}">${escapeHtml(textContent)}<rt>x</rt></ruby>`
+            i = annotation.indices[annotation.indices.length - 1] + 1
         } else {
-            html += escapeHtml(text[i]);
-            i++;
+            html += escapeHtml(text[i])
+            i++
         }
     }
 
-    preview.innerHTML = html;
-    
+    preview.innerHTML = html
+
     setTimeout(() => {
-        musicBlocks.forEach(block => {
-            const el = document.getElementById(block.id);
+        musicBlocks.forEach((block) => {
+            const el = document.getElementById(block.id)
             if (el && !el.hasChildNodes()) {
                 try {
                     ABCJS.renderAbc(block.id, block.abc, {
                         responsive: "resize",
-                        staffwidth: 650
-                    });
+                        staffwidth: 650,
+                    })
                 } catch (e) {
-                    el.innerHTML = '<p style="color: red;">Erreur de notation ABC</p>';
+                    el.innerHTML = '<p style="color: red;">Erreur de notation ABC</p>'
                 }
             }
-        });
-    }, 0);
+        })
+    }, 0)
 }
 
 function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    const div = document.createElement("div")
+    div.textContent = text
+    return div.innerHTML
 }
 
 function downloadHTML() {
-    let bodyContent = preview.innerHTML;
-    
-    musicBlocks.forEach(block => {
-        const tempDiv = document.createElement('div');
-        const tempId = 'export_' + block.id;
-        document.body.appendChild(tempDiv);
-        tempDiv.id = tempId;
-        
+    let bodyContent = preview.innerHTML
+
+    musicBlocks.forEach((block) => {
+        const tempDiv = document.createElement("div")
+        const tempId = "export_" + block.id
+        document.body.appendChild(tempDiv)
+        tempDiv.id = tempId
+
         try {
             ABCJS.renderAbc(tempId, block.abc, {
                 responsive: "resize",
-                staffwidth: 700
-            });
-            
-            const svgContent = tempDiv.innerHTML;
-            bodyContent = bodyContent.replace(
-                `<div class="music-block-preview" id="${block.id}"></div>`,
-                `<div class="music-block-preview">${svgContent}</div>`
-            );
+                staffwidth: 700,
+            })
+
+            const svgContent = tempDiv.innerHTML
+            bodyContent = bodyContent.replace(`<div class="music-block-preview" id="${block.id}"></div>`, `<div class="music-block-preview">${svgContent}</div>`)
         } catch (e) {
-            console.error('Erreur export:', e);
+            console.error("Erreur export:", e)
         }
-        
-        document.body.removeChild(tempDiv);
-    });
+
+        document.body.removeChild(tempDiv)
+    })
 
     const html = `<!DOCTYPE html>
 <html lang="fr">
@@ -388,21 +384,21 @@ function downloadHTML() {
 <body>
 ${bodyContent}
 </body>
-</html>`;
+</html>`
 
-    const blob = new Blob([html], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'texte-annote-avec-partitions.html';
-    a.click();
-    URL.revokeObjectURL(url);
+    const blob = new Blob([html], { type: "text/html" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "texte-annote-avec-partitions.html"
+    a.click()
+    URL.revokeObjectURL(url)
 }
 
-textInput.addEventListener('input', () => {
-    text = textInput.value;
-    renderSelectionArea();
-    updatePreview();
-});
+textInput.addEventListener("input", () => {
+    text = textInput.value
+    renderSelectionArea()
+    updatePreview()
+})
 
-parseText();
+parseText()
