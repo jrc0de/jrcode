@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/img/favicon.ico" />
+        <meta name="color-scheme" content="light dark" />
+        <link rel="stylesheet" href="/css/global.css" />
+        <script src="https://cdn.counter.dev/script.js" data-id="435f1c20-b9e5-41ba-bcb9-531b52e12138" data-utcoffset="1"></script>
+        <title>JRCode</title>
+    </head>
+
+    <body>
+        <main class="container">
+            <nav>
+                <ul>
+                    <li><strong>JRCode</strong></li>
+                </ul>
+                <ul>
+                    <li><a href="/">JRDoc</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/editor">Editeur</a></li>
+                    <li><a href="/rss">RSS</a></li>
+                    <li>
+                        <a href="https://github.com/JacquesRaoult" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                                <path
+                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                                />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <br /><br />
+
+            <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.3/dist/abcjs-basic-min.js"></script>
+
+            <style>
+                .toolbar {
+                    display: flex;
+                    gap: 0.5rem;
+                    flex-wrap: wrap;
+                    margin-bottom: 1rem;
+                }
+
+                .toolbar .separator {
+                    width: 1px;
+                    background: var(--pico-muted-border-color);
+                    margin: 0 0.25rem;
+                }
+
+                textarea,
+                .selection-area,
+                .preview-output {
+                    font-family: "Courier New", "Consolas", monospace;
+                }
+
+                .selection-area {
+                    font-size: 1rem;
+                    line-height: 2.5;
+                    padding: 1.5rem;
+                    background: var(--pico-background-color);
+                    border: 1px solid var(--pico-muted-border-color);
+                    border-radius: var(--pico-border-radius);
+                    min-height: 150px;
+                    user-select: none;
+                    cursor: text;
+                }
+
+                .char {
+                    display: inline-block;
+                    position: relative;
+                    cursor: pointer;
+                    transition: background 0.1s;
+                    border-radius: 2px;
+                }
+
+                .char:hover {
+                    background: var(--pico-primary-hover-background);
+                }
+
+                .char.selected {
+                    background: var(--pico-primary-background);
+                    color: var(--pico-primary-inverse);
+                }
+
+                .char.annotated.selected {
+                    background: var(--pico-primary-background);
+                    color: var(--pico-primary-inverse);
+                    outline: 2px solid var(--pico-contrast);
+                }
+
+                .char.annotated {
+                    background: color-mix(in srgb, var(--pico-primary-background) 20%, transparent);
+                }
+
+                .whitespace {
+                    white-space: pre;
+                    cursor: default;
+                    pointer-events: none;
+                }
+
+                .preview-output {
+                    font-size: 1rem;
+                    line-height: 2.5;
+                    padding: 1.5rem;
+                    background: var(--pico-background-color);
+                    border: 1px solid var(--pico-muted-border-color);
+                    border-radius: var(--pico-border-radius);
+                    min-height: 100px;
+                    margin-top: 1rem;
+                }
+
+                ruby {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                rt {
+                    visibility: hidden;
+                    font-size: 0;
+                }
+
+                ruby.median::before {
+                    content: "";
+                    position: absolute;
+                    top: 0.4em;
+                    width: 0.7em;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background: currentColor;
+                }
+
+                ruby.median-haut::before {
+                    content: "";
+                    position: absolute;
+                    top: -0.05em;
+                    width: 0.7em;
+                    left: 0;
+                    right: 0;
+                    height: 2px;
+                    background: currentColor;
+                }
+
+                ruby.flexe::before {
+                    content: "";
+                    position: absolute;
+                    top: -0.05em;
+                    left: 50%;
+                    width: 2px;
+                    height: 0.5em;
+                    background: currentColor;
+                    transform: translateX(-50%);
+                }
+
+                ruby.flexe::after {
+                    content: "";
+                    position: absolute;
+                    top: 0.15em;
+                    left: 50%;
+                    width: 0.5em;
+                    height: 2px;
+                    background: currentColor;
+                    transform: translateX(-50%);
+                }
+
+                ruby.montant::before {
+                    content: "";
+                    position: absolute;
+                    top: 0.2em;
+                    width: 0.7em;
+                    height: 2px;
+                    background: currentColor;
+                    transform-origin: center center;
+                    transform: translateX(-55%);
+                    transform: rotate(-45deg);
+                }
+
+                ruby.descendant::before {
+                    content: "";
+                    position: absolute;
+                    top: 0.2em;
+                    width: 0.7em;
+                    height: 2px;
+                    background: currentColor;
+                    transform-origin: center center;
+                    transform: translateX(-50%);
+                    transform: rotate(45deg);
+                }
+
+                .music-block {
+                    margin: 1.5rem 0;
+                }
+
+                .music-block-preview {
+                    padding: 0;
+                }
+
+                dialog {
+                    max-width: 800px;
+                }
+
+                dialog textarea {
+                    min-height: 200px;
+                    font-family: "Courier New", monospace;
+                }
+            </style>
+
+            <hgroup>
+                <h1>✍️ Éditeur pour notation bâtonnets + partitions <kbd>v3.0</kbd></h1>
+            </hgroup>
+
+            <article>
+                💡 <strong>Mode d'emploi :</strong> <br />• Saisissez du texte brut dans le panneau 1 <br />• Cliquez sur une lettre ou groupe de lettres à formater dans le panneau 2 <br />• Appliquez
+                une mise en forme en choisissant un type de notation bâtonnets <br />• Insérez des partitions musicales avec le bouton "🎵 Ajouter une partition" <br />• Prévisualisez le résultat dans
+                le panneau 3 <br />• Exportez au format HTML
+            </article>
+
+            <article>
+                <header><strong>1. Saisissez du texte brut</strong></header>
+                <textarea id="textInput" rows="5" placeholder="Saisissez votre texte ici..."></textarea>
+            </article>
+
+            <article>
+                <header><strong>2. Cliquez pour sélectionner des lettres puis les mettre en forme</strong></header>
+                <aside>
+                    <div class="toolbar">
+                        <button onclick="applyStyle('median')"><sub>━</sub> Médian bas</button>
+                        <button onclick="applyStyle('median-haut')"><sup>━</sup> Médian haut</button>
+                        <button onclick="applyStyle('flexe')">+ Flexe</button>
+                        <button onclick="applyStyle('montant')">⟋ Montant</button>
+                        <button onclick="applyStyle('descendant')">⟍ Descendant</button>
+                        <div class="separator"></div>
+                        <button onclick="removeStyle()" class="secondary">🗑️ Retirer</button>
+                        <button onclick="clearAll()" class="contrast">⟲ Réinitialiser</button>
+                        <div class="separator"></div>
+                        <button onclick="openMusicDialog()" class="outline">🎵 Ajouter une partition</button>
+                    </div>
+                </aside>
+                <div class="selection-area" id="selectionArea"></div>
+            </article>
+
+            <article>
+                <header><strong>3. Prévisualisation finale</strong></header>
+                <div class="preview-output" id="preview"></div>
+            </article>
+
+            <article>
+                <header><strong>Exportez votre texte</strong></header>
+                <div class="grid">
+                    <button onclick="downloadHTML()">💾 Télécharger le HTML</button>
+                </div>
+            </article>
+
+            <dialog id="musicDialog">
+                <article>
+                    <header>
+                        <button aria-label="Close" rel="prev" onclick="closeMusicDialog()"></button>
+                        <h3>🎵 Ajouter une partition ABC</h3>
+                    </header>
+                    <p>Saisissez votre notation ABC ci-dessous :</p>
+                    <textarea id="abcInput" placeholder="X:1&#10;T:Titre de la chanson&#10;M:4/4&#10;L:1/4&#10;K:C&#10;C D E F | G2 A2 | B2 c2 | d4 |"></textarea>
+                    <footer>
+                        <button class="secondary" onclick="closeMusicDialog()">Annuler</button>
+                        <button onclick="insertMusic()">✓ Insérer la partition</button>
+                    </footer>
+                </article>
+            </dialog>
+
+            <script src="/js/editor-music.js"></script>
+
+            <br />
+        </main>
+    </body>
+</html>
