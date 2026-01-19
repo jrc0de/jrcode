@@ -2587,14 +2587,6 @@ nav strong {
     transition: text-shadow 0.3s ease;
 }
 
-nav strong:hover {
-    text-shadow:
-        0 0 20px rgba(0, 204, 136, 1),
-        0 0 40px rgba(0, 204, 136, 0.7),
-        0 0 60px rgba(0, 204, 136, 0.5),
-        0 0 80px rgba(0, 204, 136, 0.3);
-}
-
 .icon-inline {
     width: 1.5em;
     height: auto;
@@ -2602,22 +2594,22 @@ nav strong:hover {
     display: inline-block;
 }
 
-.nav-link {
-    display: inline-flex;
+.left-menu {
+    height: 3em;
+    width: auto;
+    display: block;
+}
+
+.right-menu {
+    width: 1.5em;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+nav ul li a {
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2s;
-}
-
-.nav-link:hover {
-    opacity: 0.8;
-    text-decoration: underline;
-    text-decoration-color: currentColor;
-}
-
-.ico-inline {
-    height: 1.1em;
-    width: 1.1em;
+    gap: 0.5em;
 }
