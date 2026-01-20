@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+
+
+  <!-- Fond transparent -->
+  <rect width="32" height="32" fill="none"/>
+  
+  <!-- Le poisson centré et légèrement orienté vers le haut -->
+  <g transform="translate(16, 16) scale(0.38) rotate(-5 0 0)">
+    <!-- Corps du poisson - arc supérieur -->
+    <path d="M -22 0 Q -8 -28 23 -8" 
+          fill="none" 
+          stroke="#42B883" 
+          stroke-width="5"
+          stroke-linecap="round"/>
+    
+    <!-- Corps du poisson - arc inférieur -->
+    <path d="M -22 0 Q -8 28 23 8" 
+          fill="none" 
+          stroke="#42B883" 
+          stroke-width="5"
+          stroke-linecap="round"/>
+    
+    <!-- Tête fermée -->
+    <path d="M 23 -8 Q 28 0 23 8" 
+          fill="none" 
+          stroke="#42B883" 
+          stroke-width="5"
+          stroke-linecap="round"/>
+    
+    <!-- Remplissage subtil -->
+    <path d="M -20 0 Q -8 -26 22 -7 Q 26 0 22 7 Q -8 26 -20 0 Z" 
+          fill="#42B883" 
+          opacity="0.15"/>
+    
+    <!-- L'œil -->
+    <circle cx="15" cy="-3" r="3" fill="#42B883"/>
+    <circle cx="16" cy="-4" r="1.2" fill="#1a1a1a"/>
+    
+    <!-- Queue en X (tout en vert) -->
+    <path d="M -22 -3 L -36 -15 L -39 -12 L -25 -1 Z" fill="#42B883"/>
+    <path d="M -22 3 L -36 15 L -39 12 L -25 1 Z" fill="#42B883"/>
+    <path d="M -22 -3 L -25 -1 L -39 6 L -36 3 Z" fill="#42B883"/>
+    <path d="M -22 3 L -25 1 L -39 -6 L -36 -3 Z" fill="#42B883"/>
+    <circle cx="-25" cy="0" r="2" fill="#42B883"/>
+
+  </g>
+</svg>
