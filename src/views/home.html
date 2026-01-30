@@ -54,9 +54,11 @@
                 <li><code>bun add &lt;package&gt; --dev</code> ou <code>bun add &lt;package&gt; -d</code> – Installer un package en dépendance de développement</li>
                 <li><code>bun remove &lt;package&gt;</code> – Désinstaller un package</li>
                 <li><code>bun outdated</code> – Lister les packages obsolètes</li>
-                <li><code>bun update</code> – Mettre à jour les packages</li>
+                <li><code>bun update</code> – Mettre à jour les packages (dans les limites de package.json)</li>
+                <li><code>bun update --latest</code> – Mettre à jour les packages (ignore les contraintes de version)</li>
                 <li><code>bun add &lt;package&gt;@latest</code> – Installer ou forcer la dernière version d'un package</li>
-                <li><code>bun run &lt;script.js&gt;</code> ou <code>bun &lt;script.js&gt;</code> – Exécuter un script</li>
+                <li><code>bun &lt;script.js&gt;</code> – Exécuter un script</li>
+                <li><code>bunx &lt;package&gt;</code> – Exécuter un package sans l'installer</li>
                 <li><code>bun audit</code> – Scanner les vulnérabilités de sécurité</li>
                 <li><code>bun audit fix</code> – Corriger les vulnérabilités de sécurité</li>
             </ul>
