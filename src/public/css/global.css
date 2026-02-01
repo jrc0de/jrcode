@@ -2592,6 +2592,7 @@ nav strong {
     height: auto;
     vertical-align: middle;
     display: inline-block;
+    margin-right: 0.25em;
 }
 
 .left-menu {
