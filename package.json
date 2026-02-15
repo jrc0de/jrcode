@@ -12,13 +12,12 @@
         "lint": "oxlint",
         "lint:fix": "oxlint --fix",
         "fmt": "oxfmt",
-        "fmt:check": "oxfmt --check"
+        "fmt:check": "oxfmt --check",
+        "check": "bunx depcheck --ignores='bun'"
     },
     "dependencies": {
         "cheerio": "^1.2.0",
-        "hono": "^4.11.9",
-        "node-fetch": "^3.3.2",
-        "sanitize-html": "^2.17.0"
+        "hono": "^4.11.9"
     },
     "devDependencies": {
         "@types/bun": "^1.3.9",
