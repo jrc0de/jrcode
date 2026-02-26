@@ -1,10 +1,10 @@
 import { Hono } from "hono"
 import home from "./home.ts"
-import languages from "./languages.ts"
+import jrdoc from "./jrdoc.ts"
 
 const routes = new Hono()
 
 routes.route("/", home)
-routes.route("/", languages)
+routes.route("/", jrdoc)
 
 export default routes
