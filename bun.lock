@@ -5,13 +5,13 @@
     "": {
       "name": "projet-pwa",
       "dependencies": {
-        "cheerio": "latest",
-        "hono": "latest",
+        "cheerio": "^1.2.0",
+        "hono": "^4.12.3",
       },
       "devDependencies": {
-        "@types/bun": "latest",
-        "oxfmt": "latest",
-        "oxlint": "latest",
+        "@types/bun": "^1.3.9",
+        "oxfmt": "^0.35.0",
+        "oxlint": "^1.50.0",
       },
     },
   },
