@@ -1,18 +1,28 @@
 import { Hono } from "hono"
 import * as cheerio from "cheerio"
 
+interface Video {
+    title: string
+    link: string
+    description: string
+    pubDate: string
+}
+
+interface Cache {
+    data: Video[] | null
+    timestamp: number | null
+}
+
 const app = new Hono()
 
-// Cache en mémoire
-const cache = {
+const cache: Cache = {
     data: null,
     timestamp: null,
 }
 
 const CACHE_DURATION = 3 * 60 * 60 * 1000
 
-async function scrapeOrthodoxieVideos() {
-    // Vérifier le cache
+async function scrapeOrthodoxieVideos(): Promise<Video[]> {
     const now = Date.now()
     if (cache.data && cache.timestamp && now - cache.timestamp < CACHE_DURATION) {
         console.log("✨ Utilisation du cache Orthodoxie (age: " + Math.round((now - cache.timestamp) / 1000 / 60) + " min)")
@@ -35,23 +45,17 @@ async function scrapeOrthodoxieVideos() {
 
         const html = await response.text()
         const $ = cheerio.load(html)
-        const videos = []
+        const videos: Video[] = []
 
-        // sélecteur principal
         const ul = $("ul.cYdhWw.bYqadz.dsmMTm.hsLHiM.gsLiKq.iAgshX.gsLiKH.fqiJkQ.bYPznK")
 
         ul.find("li").each((i, elem) => {
             try {
                 const lien = $(elem).find("a.lnMwsN").attr("href")
-                const titreElement = $(elem).find('span[data-type="title"]').first()
-                const sousTitreElement = $(elem).find('span[data-type="subtitle"]').first()
-
-                const titre = titreElement.text().trim()
-                const sousTitre = sousTitreElement.text().trim()
+                const titre = $(elem).find('span[data-type="title"]').first().text().trim()
+                const sousTitre = $(elem).find('span[data-type="subtitle"]').first().text().trim()
                 const titreComplet = sousTitre ? `${sousTitre} - ${titre}` : titre
-
                 const description = $(elem).find(".fLAmAH").text().trim()
-
                 const dateText = $(elem)
                     .find(".gxLqec")
                     .filter(function () {
@@ -71,34 +75,33 @@ async function scrapeOrthodoxieVideos() {
                     })
                 }
             } catch (err) {
-                console.error(`Erreur sur l'élément ${i}:`, err.message)
+                console.error(`Erreur sur l'élément ${i}:`, err instanceof Error ? err.message : err)
             }
         })
 
         console.log(`✅ ${videos.length} vidéos scrapées`)
 
-        // Mettre en cache
         cache.data = videos
         cache.timestamp = Date.now()
 
         return videos
     } catch (error) {
-        console.error("❌ Erreur lors du scraping:", error.message)
+        console.error("❌ Erreur lors du scraping:", error instanceof Error ? error.message : error)
         return []
     }
 }
 
-function convertirDateFrancaise(dateStr) {
+function convertirDateFrancaise(dateStr: string): string {
     try {
         const [jour, mois, annee] = dateStr.split("/")
-        const date = new Date(annee, mois - 1, jour)
+        const date = new Date(Number(annee), Number(mois) - 1, Number(jour))
         return date.toUTCString()
     } catch {
         return new Date().toUTCString()
     }
 }
 
-function generateRSSFromVideos(videos) {
+function generateRSSFromVideos(videos: Video[]): string {
     if (videos.length === 0) {
         return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
@@ -143,8 +146,8 @@ function generateRSSFromVideos(videos) {
 }
 
 app.get("/rss/feed1", async (c) => {
-    const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown"
-    const userAgent = c.req.header("user-agent")?.substring(0, 50) || "unknown"
+    const ip = c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown"
+    const userAgent = c.req.header("user-agent")?.substring(0, 50) ?? "unknown"
     console.log(`📥 Requête /feed1 - IP: ${ip} - UA: ${userAgent}...`)
 
     const videos = await scrapeOrthodoxieVideos()

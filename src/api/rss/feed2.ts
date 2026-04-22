@@ -1,18 +1,30 @@
 import { Hono } from "hono"
 import * as cheerio from "cheerio"
+import type { AnyNode } from "domhandler"
+import type { Cheerio } from "cheerio"
+
+interface Video {
+    title: string
+    link: string
+    description: string
+    pubDate: string
+}
+
+interface Cache {
+    data: Video[] | null
+    timestamp: number | null
+}
 
 const app = new Hono()
 
-// Cache en mémoire
-const cache = {
+const cache: Cache = {
     data: null,
     timestamp: null,
 }
 
 const CACHE_DURATION = 3 * 60 * 60 * 1000
 
-async function scrapeVaquiVideos() {
-    // Vérifier le cache
+async function scrapeVaquiVideos(): Promise<Video[]> {
     const now = Date.now()
     if (cache.data && cache.timestamp && now - cache.timestamp < CACHE_DURATION) {
         console.log("✨ Utilisation du cache Vaqui (age: " + Math.round((now - cache.timestamp) / 1000 / 60) + " min)")
@@ -36,28 +48,24 @@ async function scrapeVaquiVideos() {
         const html = await response.text()
         const $ = cheerio.load(html)
 
-        // Trouve le main
         const main = $("main")
         if (!main.length) {
             console.log("❌ Aucun <main> trouvé")
             return []
         }
 
-        // Trouve le h1 dans le main
         const h1 = main.find("h1").first()
         if (!h1.length) {
             console.log("❌ Aucun <h1> trouvé dans <main>")
             return []
         }
 
-        // Trouve le premier ul après le h1
-        let ul = null
-        h1.nextAll().each((i, elem) => {
-            if (elem.name === "ul" && !ul) {
+        let ul: Cheerio<AnyNode> | null = null
+        h1.nextAll().each((_, elem) => {
+            if (elem.type === "tag" && elem.name === "ul" && !ul) {
                 ul = $(elem)
-                return false // break
+                return false
             }
-            // Cherche aussi dans les enfants des éléments suivants
             const foundUl = $(elem).find("ul").first()
             if (foundUl.length && !ul) {
                 ul = foundUl
@@ -70,18 +78,16 @@ async function scrapeVaquiVideos() {
             return []
         }
 
-        // Extraire les vidéos
-        const videos = []
-        ul.find("li").each((i, li) => {
+        const videos: Video[] = []
+        ;(ul as Cheerio<AnyNode>).find("li").each((_, li: AnyNode) => {
             const $li = $(li)
-            const lien = $li.find("a").attr("href") || ""
-            const titre = $li.find('span[data-type="title"]').first().text().trim() || ""
-            const sousTitre = $li.find('span[data-type="subtitle"]').first().text().trim() || ""
-            const description = $li.find("p, .fLAmAH").first().text().trim() || ""
+            const lien = $li.find("a").attr("href") ?? ""
+            const titre = $li.find('span[data-type="title"]').first().text().trim()
+            const sousTitre = $li.find('span[data-type="subtitle"]').first().text().trim()
+            const description = $li.find("p, .fLAmAH").first().text().trim()
 
-            // Cherche le texte contenant "Diffusé le"
             let dateText = ""
-            $li.find("*").each((j, elem) => {
+            $li.find("*").each((_, elem) => {
                 const text = $(elem).text()
                 if (text.includes("Diffusé le")) {
                     dateText = text
@@ -101,24 +107,22 @@ async function scrapeVaquiVideos() {
 
         console.log(`✅ ${videos.length} vidéos récupérées`)
 
-        // Mettre en cache
         cache.data = videos
         cache.timestamp = Date.now()
 
         return videos
     } catch (error) {
-        console.error("❌ Erreur de récupération:", error.message)
+        console.error("❌ Erreur de récupération:", error instanceof Error ? error.message : error)
         return []
     }
 }
 
-// Convertir une date française en RFC-822 (UTC)
-function convertirDateFrancaise(dateStr) {
+function convertirDateFrancaise(dateStr: string): string {
     try {
         if (!dateStr) throw new Error("Empty date")
 
         const [jour, mois, annee] = dateStr.split("/")
-        const date = new Date(Date.UTC(annee, mois - 1, jour, 0, 0, 0))
+        const date = new Date(Date.UTC(Number(annee), Number(mois) - 1, Number(jour), 0, 0, 0))
         if (isNaN(date.getTime())) throw new Error("Invalid date")
 
         return date.toUTCString()
@@ -127,8 +131,7 @@ function convertirDateFrancaise(dateStr) {
     }
 }
 
-// Génération RSS
-function generateRSSFromVideos(videos) {
+function generateRSSFromVideos(videos: Video[]): string {
     const feedUrl = "https://www.jrcode.name/rss/feed2"
 
     if (videos.length === 0) {
@@ -178,8 +181,8 @@ function generateRSSFromVideos(videos) {
 }
 
 app.get("/rss/feed2", async (c) => {
-    const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown"
-    const userAgent = c.req.header("user-agent")?.substring(0, 50) || "unknown"
+    const ip = c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown"
+    const userAgent = c.req.header("user-agent")?.substring(0, 50) ?? "unknown"
     console.log(`📥 Requête /feed2 - IP: ${ip} - UA: ${userAgent}...`)
 
     const videos = await scrapeVaquiVideos()
