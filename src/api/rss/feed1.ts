@@ -139,7 +139,7 @@ async function scrapeOrthodoxieVideos(): Promise<Video[]> {
 
 // ── Génération RSS ────────────────────────────────────────────────────────────
 function generateRSSFromVideos(videos: Video[]): string {
-    const feedUrl = "https://www.jrcode.name/rss/feed2"
+    const feedUrl = "https://www.jrcode.name/rss/feed1"
     const channelLink = "https://www.france.tv/france-2/orthodoxie"
 
     if (videos.length === 0) {
@@ -190,10 +190,11 @@ function generateRSSFromVideos(videos: Video[]): string {
 }
 
 // ── Route ─────────────────────────────────────────────────────────────────────
-app.get("/rss/feed2", async (c) => {
+app.get("/rss/feed1", async (c) => {
     const ip = c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown"
     const userAgent = c.req.header("user-agent")?.substring(0, 50) ?? "unknown"
-    console.log(`📥 Requête /feed2 - IP: ${ip} - UA: ${userAgent}...`)
+    console.log(`📥 Requête /feed1
+ - IP: ${ip} - UA: ${userAgent}...`)
 
     const videos = await scrapeOrthodoxieVideos()
     const rss = generateRSSFromVideos(videos)
