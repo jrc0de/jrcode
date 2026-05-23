@@ -1,28 +1,9 @@
 import * as cheerio from "cheerio"
 
-export interface Video {
-    id: number
-    title: string
-    link: string
-    description: string
-    duration: string
-    pubDate: string
-    thumbnail: string
-}
-
-export interface FeedConfig {
-    title: string
-    link: string
-    description: string
-    feedUrl: string
-    playlistUrl: string
-    errorGuid: string
-}
-
 const BASE_URL = "https://www.france.tv"
 
-export function extractVideosFromNextData($: ReturnType<typeof cheerio.load>): Video[] {
-    const videos: Video[] = []
+export function extractVideosFromNextData($) {
+    const videos = []
 
     $("script").each((_, el) => {
         const content = $(el).html() ?? ""
@@ -63,7 +44,7 @@ export function extractVideosFromNextData($: ReturnType<typeof cheerio.load>): V
     return videos
 }
 
-export function getTotalPages($: ReturnType<typeof cheerio.load>): number {
+export function getTotalPages($) {
     let last = 0
     $("script").each((_, el) => {
         const content = $(el).html() ?? ""
@@ -73,7 +54,7 @@ export function getTotalPages($: ReturnType<typeof cheerio.load>): number {
     return last + 1
 }
 
-export async function fetchPage(url: string) {
+export async function fetchPage(url) {
     const response = await fetch(url, {
         headers: {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
@@ -86,7 +67,7 @@ export async function fetchPage(url: string) {
     return cheerio.load(html)
 }
 
-export async function scrapeVideos(config: FeedConfig, cache: { data: Video[] | null; timestamp: number | null }, cacheDuration: number): Promise<Video[]> {
+export async function scrapeVideos(config, cache, cacheDuration) {
     const now = Date.now()
     if (cache.data && cache.timestamp && now - cache.timestamp < cacheDuration) {
         const age = Math.round((now - cache.timestamp) / 1000 / 60)
@@ -122,7 +103,7 @@ export async function scrapeVideos(config: FeedConfig, cache: { data: Video[] | 
     }
 }
 
-export function generateRSS(videos: Video[], config: FeedConfig): string {
+export function generateRSS(videos, config) {
     if (videos.length === 0) {
         return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

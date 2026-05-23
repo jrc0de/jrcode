@@ -1,16 +1,16 @@
 import { Hono } from "hono"
-import { type Video, type FeedConfig, scrapeVideos, generateRSS } from "./scraper"
+import { scrapeVideos, generateRSS } from "./scraper"
 
 const app = new Hono()
 
-const cache: { data: Video[] | null; timestamp: number | null } = {
+const cache = {
     data: null,
     timestamp: null,
 }
 
 const CACHE_DURATION = 3 * 60 * 60 * 1000
 
-const config: FeedConfig = {
+const config = {
     title: "Vaqui - France 3",
     link: "https://www.france.tv/france-3/provence-alpes-cote-d-azur/vaqui",
     description: "Les dernières émissions Vaqui sur France 3",
