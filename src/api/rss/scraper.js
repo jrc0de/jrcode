@@ -2,7 +2,7 @@ import * as cheerio from "cheerio"
 
 const BASE_URL = "https://www.france.tv"
 
-export function extractVideosFromNextData($) {
+function extractVideosFromNextData($) {
     const videos = []
 
     $("script").each((_, el) => {
@@ -44,7 +44,7 @@ export function extractVideosFromNextData($) {
     return videos
 }
 
-export function getTotalPages($) {
+function getTotalPages($) {
     let last = 0
     $("script").each((_, el) => {
         const content = $(el).html() ?? ""
@@ -54,7 +54,7 @@ export function getTotalPages($) {
     return last + 1
 }
 
-export async function fetchPage(url) {
+async function fetchPage(url) {
     const response = await fetch(url, {
         headers: {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",

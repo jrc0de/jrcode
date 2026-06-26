@@ -1,7 +1,7 @@
 {
     "name": "jrcode",
     "type": "module",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
         "dev": "bun run --hot src/index.js",
         "start": "bun run src/index.js",
@@ -9,14 +9,17 @@
         "lint:fix": "oxlint --fix",
         "fmt": "oxfmt",
         "fmt:check": "oxfmt --check",
-        "check": "bunx depcheck --ignores='bun'"
+        "knip": "knip"
     },
     "dependencies": {
         "cheerio": "^1.2.0",
-        "hono": "^4.12.25"
+        "hono": "^4.12.27"
     },
     "devDependencies": {
-        "oxfmt": "^0.54.0",
-        "oxlint": "^1.69.0"
+        "@types/node": "^26.0.1",
+        "knip": "^6.21.0",
+        "oxfmt": "^0.56.0",
+        "oxlint": "^1.71.0",
+        "typescript": "^6.0.3"
     }
 }
