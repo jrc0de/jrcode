@@ -36,7 +36,7 @@ async function fetchAndFilterFeed() {
 
     // Extraire les métadonnées du channel
     const channelBlock = xml.match(/<channel>([\s\S]*?)<item>/)?.[1] ?? ""
-    const title = extractTag(channelBlock, "title") || "Liturgia"
+    const title = extractTag(channelBlock, "title") || "Schola Sainte Cecile"
     const link = extractTag(channelBlock, "link") || "https://schola-sainte-cecile.com"
     const description = extractTag(channelBlock, "description") || "Liturgie & musique sacrée traditionnelles"
     const language = extractTag(channelBlock, "language") || "fr-FR"
@@ -81,7 +81,7 @@ app.get("/rss/feed3", async (c) => {
         return c.body(
             `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
-  <title>Liturgia (hors Programmes) - Erreur</title>
+  <title>Schola Sainte Cecile - Erreur</title>
   <description>Impossible de récupérer le flux source.</description>
 </channel></rss>`,
             503,
