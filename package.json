@@ -8,18 +8,15 @@
         "lint": "oxlint",
         "lint:fix": "oxlint --fix",
         "fmt": "oxfmt",
-        "fmt:check": "oxfmt --check",
-        "knip": "knip"
+        "fmt:check": "oxfmt --check"
     },
     "dependencies": {
         "cheerio": "^1.2.0",
-        "hono": "^4.12.27"
+        "hono": "^4.13.2"
     },
     "devDependencies": {
-        "@types/node": "^26.0.1",
-        "knip": "^6.21.0",
-        "oxfmt": "^0.56.0",
-        "oxlint": "^1.71.0",
-        "typescript": "^6.0.3"
+        "oxfmt": "^0.63.0",
+        "oxlint": "^1.78.0",
+        "typescript": "^7.0.2"
     }
 }
