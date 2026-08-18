@@ -1,6 +1,6 @@
-import { Hono } from "hono"
+import { Elysia } from "elysia"
 
-const app = new Hono()
+const app = new Elysia()
 
 const SOURCE_URL = "https://schola-sainte-cecile.com/feed/"
 const FEED_URL = "https://www.jrcode.cloud/rss/feed3"
@@ -72,20 +72,25 @@ async function fetchAndFilterFeed() {
     return result
 }
 
-app.get("/rss/feed3", async (c) => {
+app.get("/rss/feed3", async () => {
     try {
         const xml = await fetchAndFilterFeed()
-        return c.body(xml, 200, { "Content-Type": "application/rss+xml; charset=UTF-8" })
+        return new Response(xml, {
+            status: 200,
+            headers: { "Content-Type": "application/rss+xml; charset=UTF-8" },
+        })
     } catch (error) {
         console.error("❌ Erreur schola:", error instanceof Error ? error.message : error)
-        return c.body(
+        return new Response(
             `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
   <title>Schola Sainte Cecile - Erreur</title>
   <description>Impossible de récupérer le flux source.</description>
 </channel></rss>`,
-            503,
-            { "Content-Type": "application/rss+xml; charset=UTF-8" },
+            {
+                status: 503,
+                headers: { "Content-Type": "application/rss+xml; charset=UTF-8" },
+            },
         )
     }
 })

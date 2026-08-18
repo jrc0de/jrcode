@@ -1,7 +1,7 @@
-import { Hono } from "hono"
+import { Elysia } from "elysia"
 import { scrapeVideos, generateRSS } from "./scraper"
 
-const app = new Hono()
+const app = new Elysia()
 
 const cache = {
     data: null,
@@ -19,14 +19,19 @@ const config = {
     errorGuid: "vaqui-scraper-error-static",
 }
 
-app.get("/rss/feed2", async (c) => {
-    const ip = c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown"
-    const userAgent = c.req.header("user-agent")?.substring(0, 50) ?? "unknown"
+app.get("/rss/feed2", async ({ headers }) => {
+    const ip = headers["x-forwarded-for"] ?? headers["x-real-ip"] ?? "unknown"
+    const userAgent = headers["user-agent"]?.substring(0, 50) ?? "unknown"
     console.log(`📥 Requête /feed2 - IP: ${ip} - UA: ${userAgent}...`)
 
     const videos = await scrapeVideos(config, cache, CACHE_DURATION)
-    return c.text(generateRSS(videos, config), 200, {
-        "Content-Type": "application/rss+xml; charset=utf-8",
+    const rss = generateRSS(videos, config)
+
+    return new Response(rss, {
+        status: 200,
+        headers: {
+            "Content-Type": "application/rss+xml; charset=utf-8",
+        },
     })
 })
 
