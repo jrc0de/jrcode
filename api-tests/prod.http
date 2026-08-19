@@ -1,0 +1,5 @@
+### FEED 1
+GET https://www.jrcode.cloud/rss/feed1
+
+### FEED 2
+GET https://www.jrcode.cloud/rss/feed2

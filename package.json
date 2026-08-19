@@ -1,5 +1,5 @@
 {
-    "name": "jrcode",
+    "name": "jrcode-api",
     "type": "module",
     "main": "src/index.js",
     "scripts": {
@@ -12,11 +12,10 @@
     },
     "dependencies": {
         "cheerio": "^1.2.0",
-        "hono": "^4.13.2"
+        "hono": "^4.13.3"
     },
     "devDependencies": {
-        "oxfmt": "^0.63.0",
-        "oxlint": "^1.78.0",
-        "typescript": "^7.0.2"
+        "oxfmt": "^0.64.0",
+        "oxlint": "^1.79.0"
     }
 }

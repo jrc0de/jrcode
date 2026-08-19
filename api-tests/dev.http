@@ -1,0 +1,5 @@
+### FEED 1
+GET http://localhost:3000/rss/feed1
+
+### FEED 2
+GET http://localhost:3000/rss/feed2
