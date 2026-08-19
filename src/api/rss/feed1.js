@@ -1,7 +1,7 @@
-import { Elysia } from "elysia"
+import { Hono } from "hono"
 import { scrapeVideos, generateRSS } from "./scraper"
 
-const app = new Elysia()
+const app = new Hono()
 
 const cache = {
     data: null,
@@ -19,19 +19,14 @@ const config = {
     errorGuid: "orthodoxie-scraper-error-static",
 }
 
-app.get("/rss/feed1", async ({ headers }) => {
-    const ip = headers["x-forwarded-for"] ?? headers["x-real-ip"] ?? "unknown"
-    const userAgent = headers["user-agent"]?.substring(0, 50) ?? "unknown"
+app.get("/rss/feed1", async (c) => {
+    const ip = c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown"
+    const userAgent = c.req.header("user-agent")?.substring(0, 50) ?? "unknown"
     console.log(`📥 Requête /feed1\n - IP: ${ip} - UA: ${userAgent}...`)
 
     const videos = await scrapeVideos(config, cache, CACHE_DURATION)
-    const rss = generateRSS(videos, config)
-
-    return new Response(rss, {
-        status: 200,
-        headers: {
-            "Content-Type": "application/rss+xml; charset=utf-8",
-        },
+    return c.text(generateRSS(videos, config), 200, {
+        "Content-Type": "application/rss+xml; charset=utf-8",
     })
 })
 

@@ -1,8 +1,14 @@
-import { Elysia } from "elysia"
+import { Hono } from "hono"
+import { compress } from "hono/compress"
 import apiRoutes from "./api/index.js"
 
-const app = new Elysia()
+const app = new Hono()
 
-app.use(apiRoutes)
+app.use(compress())
 
-export default app.listen(process.env.PORT || 3000)
+app.route("/", apiRoutes)
+
+export default {
+    port: process.env.PORT || 3000,
+    fetch: app.fetch,
+}
