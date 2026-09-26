@@ -12,13 +12,13 @@
     },
     "dependencies": {
         "cheerio": "^1.2.0",
-        "hono": "^4.13.4"
+        "hono": "^4.13.9"
     },
     "devDependencies": {
-        "oxfmt": "^0.65.0",
-        "oxlint": "^1.80.0"
+        "oxfmt": "^0.70.0",
+        "oxlint": "^1.85.0"
     },
     "engines": {
-        "bun": "1.4"
+        "bun": "1.4.2"
     }
 }
