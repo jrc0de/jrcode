@@ -36,7 +36,7 @@ let age = 25 // TypeScript déduit : number
 let prenom = "Alice" // TypeScript déduit : string
 
 // Le type est "verrouillé" ensuite même sans annotation explicite
-age = "twenty" // Error [!code error]
+age = "twenty" // Erreur [!code error]
 ```
 
 ## Types _null_ et _undefined_

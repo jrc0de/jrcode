@@ -24,12 +24,16 @@ let data: unknown = 25
 data = "twenty" // OK, aucune erreur
 data = true // OK aussi
 
-data.toUpperCase() // Error [!code error] — `data` est de type `unknown`
+data.toUpperCase() // [!code error] Erreur, `data` est de type `unknown`
 
 if (typeof data === "string") {
     data.toUpperCase() // OK, TypeScript sait que `data` est une string ici
 }
 ```
+
+::: warning Narrowing
+Le _narrowing_ (« resserrement ») désigne le fait de réduire le type d'une variable à un type plus précis, à l'intérieur d'un bloc de code, grâce à une vérification comme `typeof` ou une comparaison directe.
+:::
 
 ## Type _union_
 
@@ -40,7 +44,7 @@ let id: string | number
 
 id = 42 // OK
 id = "abc123" // OK
-id = true // Error [!code error]
+id = true // Erreur [!code error]
 ```
 
 ## Type _empty object_
@@ -52,8 +56,8 @@ let obj: {} = { name: "Alice" }
 
 obj = "hello" // OK ?!
 obj = 42 // OK ?!
-obj = null // Error [!code error]
-obj = undefined // Error [!code error]
+obj = null // Erreur [!code error]
+obj = undefined // Erreur [!code error]
 ```
 
 ## Type _enum_
@@ -70,7 +74,7 @@ enum State {
 // `State` est un nouveau type, utilisable comme n'importe quel autre type
 let s: State
 s = State.Active // OK
-s = "active" // Error [!code error] — il faut passer par State.Active
+s = "active" // Erreur [!code error] — il faut passer par State.Active
 ```
 
 Par défaut, chaque membre reçoit une valeur numérique automatique (0, 1, 2...), mais on peut aussi assigner des valeurs explicites, notamment des chaînes :
@@ -91,11 +95,11 @@ Un type literal restreint une variable à une ou plusieurs valeurs exactes, plut
 let direction: "left" | "right"
 direction = "left" // OK
 direction = "right" // OK
-direction = "up" // Error [!code error]
+direction = "up" // Erreur [!code error]
 
 let diceRoll: 1 | 2 | 3 | 4 | 5 | 6
 diceRoll = 4 // OK
-diceRoll = 7 // Error [!code error]
+diceRoll = 7 // Erreur [!code error]
 ```
 
 ::: tip Astuce
@@ -111,5 +115,5 @@ type Direction = "left" | "right"
 type User = { name: string; age: number; facing: Direction }
 
 let user1: User = { name: "Alice", age: 25, facing: "left" }
-let user2: User = { name: "Bob", age: 30, facing: "up" } // Error [!code error]
+let user2: User = { name: "Bob", age: 30, facing: "up" } // Erreur [!code error]
 ```
