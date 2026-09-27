@@ -2,15 +2,11 @@
 
 ## Installation
 
-Le compilateur TypeScript (`tsc`) s'installe globalement via Bun, ce qui rend la commande `tsc` disponible directement dans le terminal.
+Le compilateur TypeScript (`tsc`) s'installe globalement, ce qui rend la commande `tsc` disponible directement dans le terminal.
 
 ```bash
 bun add -g typescript
 ```
-
-::: tip Astuce
-Bun peut exécuter directement des fichiers `.ts` sans compilation préalable (`bun run fichier.ts`), mais il ne fait alors aucune vérification de type : il se contente de retirer les annotations. Pour profiter de la vérification de types, il faut passer par `tsc`.
-:::
 
 ## Compilation d'un fichier
 

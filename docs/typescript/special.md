@@ -49,7 +49,7 @@ id = true // Erreur [!code error]
 
 ## Type _empty object_
 
-Le type `{}`, malgré son nom informel "objet vide", n'est pas propre aux objets : c'est un type à part entière, utilisable partout (variable, paramètre de fonction, etc.), qui signifie "n'importe quelle valeur sauf `null` et `undefined`".
+Le type `{}`, malgré son nom d'_objet vide_, n'est pas propre aux objets. C'est un type à part entière, utilisable partout, qui signifie n'importe quelle valeur sauf `null` et `undefined`.
 
 ```ts
 let obj: {} = { name: "Alice" }
@@ -89,7 +89,7 @@ enum Color {
 
 ## Type _literal_
 
-Un type literal restreint une variable à une ou plusieurs valeurs exactes, plutôt qu'à un type large comme `string` ou `number`. Cela fonctionne aussi avec des nombres ou des booléens.
+Un type _literal_ restreint une variable à une ou plusieurs valeurs exactes, plutôt qu'à un type large comme `string`. Cela fonctionne aussi avec des nombres ou des booléens.
 
 ```ts
 let direction: "left" | "right"
@@ -103,12 +103,12 @@ diceRoll = 7 // Erreur [!code error]
 ```
 
 ::: tip Astuce
-Le type _literal_ est une alternative plus légère au type _enum_ pour représenter un ensemble de valeurs fixes : pas d'objet généré à l'exécution, juste une vérification au niveau du typage.
+Le type _literal_ est une alternative plus légère au type _enum_ pour représenter un ensemble de valeurs fixes : aucun objet généré à l'exécution, juste une vérification au niveau du typage.
 :::
 
 ## Type _aliases_
 
-Le mot-clé `type` permet de nommer un type composé, pour le réutiliser sans avoir à le répéter partout. C'est particulièrement utile pour les objets, pour éviter de retaper la même structure à chaque déclaration.
+Le mot-clé `type` permet de nommer un type composé, pour le réutiliser sans avoir à le répéter partout. C'est particulièrement utile pour les objets, pour éviter de réutiliser la même structure à chaque déclaration.
 
 ```ts
 type Direction = "left" | "right"
