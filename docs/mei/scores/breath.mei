@@ -1,0 +1,26 @@
+<music>
+    <body>
+        <mdiv>
+            <score>
+                <scoreDef>
+                    <staffGrp>
+                        <staffDef n="1" lines="5" clef.shape="G" clef.line="2" />
+                    </staffGrp>
+                </scoreDef>
+
+                <section>
+                    <measure n="1">
+                        <staff n="1">
+                            <layer>
+                                <note pname="c" oct="4" dur="4" />
+                                <note pname="d" oct="4" dur="4" />
+                                <note pname="e" oct="4" dur="2" />
+                            </layer>
+                        </staff>
+                        <breath staff="1" tstamp="2.8" />
+                    </measure>
+                </section>
+            </score>
+        </mdiv>
+    </body>
+</music>

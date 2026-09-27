@@ -1,0 +1,32 @@
+.VPFooter {
+    border-top: none !important;
+}
+
+:root {
+    --vp-c-brand-1: #fdb436;
+    --vp-c-brand-2: #e39d24;
+    --vp-c-brand-3: #c4861a;
+    --vp-c-brand-soft: rgba(253, 180, 54, 0.14);
+}
+
+.VPHero .image-container {
+    position: relative;
+}
+
+.VPHero .image-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(255, 220, 150, 0.7) 0%, rgba(253, 180, 54, 0.55) 20%, rgba(253, 180, 54, 0.28) 40%, rgba(253, 180, 54, 0.1) 60%, rgba(253, 180, 54, 0) 80%);
+    filter: blur(35px);
+    mix-blend-mode: screen;
+    z-index: -1;
+}
+
+.VPHero .image-src {
+    max-width: 200px !important;
+    filter: drop-shadow(0 0 20px rgba(253, 180, 54, 0.6));
+}

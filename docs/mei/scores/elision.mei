@@ -1,0 +1,31 @@
+<music>
+    <body>
+        <mdiv>
+            <score>
+                <scoreDef>
+                    <staffGrp>
+                        <staffDef n="1" lines="5" clef.shape="G" clef.line="2" />
+                    </staffGrp>
+                </scoreDef>
+                <section>
+                    <measure n="1">
+                        <staff n="1">
+                            <layer>
+                                <note pname="g" oct="4" dur="4">
+                                    <verse n="1">
+                                        <syl con="b">A</syl>
+                                    </verse>
+                                </note>
+                                <note pname="g" oct="4" dur="4">
+                                    <verse n="1">
+                                        <syl>B</syl>
+                                    </verse>
+                                </note>
+                            </layer>
+                        </staff>
+                    </measure>
+                </section>
+            </score>
+        </mdiv>
+    </body>
+</music>

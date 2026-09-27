@@ -1,3 +1,11 @@
-node_modules/
+node_modules
+docs/.vitepress/cache
+docs/.vitepress/dist
+
+# fichiers d'environnement
 .env
+.env.local
+
+# fichiers système/éditeur
 .DS_Store
+*.log

@@ -1,0 +1,36 @@
+<mei xmlns="http://www.music-encoding.org/ns/mei">
+    <meiHead>
+        <fileDesc>
+            <titleStmt>
+                <title></title>
+            </titleStmt>
+            <pubStmt></pubStmt>
+        </fileDesc>
+    </meiHead>
+    <music>
+        <body>
+            <mdiv>
+                <score>
+                    <scoreDef>
+                        <staffGrp>
+                            <staffDef n="1" lines="5" clef.shape="G" clef.line="2" />
+                        </staffGrp>
+                    </scoreDef>
+                    <section>
+                        <measure>
+                            <staff n="1">
+                                <layer>
+                                    <note xml:id="n1" pname="a" oct="4" dur="4" />
+                                    <note xml:id="n2" pname="g" oct="4" dur="4" />
+                                    <note xml:id="n3" pname="f" oct="4" dur="4" />
+                                    <note xml:id="n4" pname="e" oct="4" dur="4" />
+                                </layer>
+                            </staff>
+                            <hairpin form="dim" startid="#n1" endid="#n4" place="below" />
+                        </measure>
+                    </section>
+                </score>
+            </mdiv>
+        </body>
+    </music>
+</mei>

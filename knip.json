@@ -1,0 +1,6 @@
+{
+    "$schema": "https://unpkg.com/knip@6/schema.json",
+    "tags": ["-lintignore"],
+    "entry": ["docs/.vitepress/config.mjs", "docs/.vitepress/theme/index.js"],
+    "ignoreDependencies": ["verovio"]
+}
