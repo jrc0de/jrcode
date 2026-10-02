@@ -34,6 +34,7 @@ switch (/* valeur à tester */) {
 
 ```js
 /* condition (Boolean) */ ? /* valeur si vrai */ : /* valeur si faux */
+const statut = age >= 18 ? "majeur" : "mineur"
 ```
 
 ## Boucle for
@@ -72,4 +73,26 @@ Les instructions `continue` et `break` fonctionnent de la même façon que dans 
 do {
   // code à répéter
 } while (/* condition (Boolean) */)
+```
+
+## Boucle for...of
+
+La boucle `for...of` parcourt les **valeurs** d'un objet itérable (tableau, chaîne de caractères, `Map`, `Set`...), sans avoir à gérer d'indice :
+
+```js
+const fruits = ["pomme", "poire", "banane"]
+
+for (const fruit of fruits) {
+    console.log(fruit) // "pomme", "poire", "banane"
+}
+```
+
+Pour parcourir les propriétés d'un objet, on combine `for...of` avec `Object.entries()` :
+
+```js
+const user = { nom: "Alice", age: 30 }
+
+for (const [cle, valeur] of Object.entries(user)) {
+    console.log(cle, valeur) // "nom Alice", "age 30"
+}
 ```
