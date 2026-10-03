@@ -77,7 +77,7 @@ do {
 
 ## Boucle for...of
 
-La boucle `for...of` parcourt les **valeurs** d'un objet itérable (tableau, chaîne de caractères, `Map`, `Set`...), sans avoir à gérer d'indice :
+La boucle `for...of` parcourt les **valeurs** d'un **itérable** (tableau, chaîne de caractères, `Map`, `Set`...), sans avoir à gérer d'indice :
 
 ```js
 const fruits = ["pomme", "poire", "banane"]
@@ -87,12 +87,37 @@ for (const fruit of fruits) {
 }
 ```
 
-Pour parcourir les propriétés d'un objet, on combine `for...of` avec `Object.entries()` :
+Un objet simple n'est **pas un itérable** : `for...of` lève une `TypeError`.
 
 ```js
 const user = { nom: "Alice", age: 30 }
 
-for (const [cle, valeur] of Object.entries(user)) {
-    console.log(cle, valeur) // "nom Alice", "age 30"
+for (const x of user) {
+} // TypeError: user is not iterable // [!code error]
+```
+
+Pour le parcourir, on parcourt plutôt un tableau dérivé de l'objet, obtenu avec l'une de ces trois méthodes :
+
+```js
+const user = { nom: "Alice", age: 30 }
+
+// Les clés
+for (const key of Object.keys(user)) {
+    console.log(key) // "nom", "age"
+}
+
+// Les valeurs
+for (const value of Object.values(user)) {
+    console.log(value) // "Alice", 30
+}
+
+// Les entrées (paires [key, value])
+for (const entry of Object.entries(user)) {
+    console.log(entry) // ["nom", "Alice"], ["age", 30]
+}
+
+// Avec le destructuring, on obtient directement key et value
+for (const [key, value] of Object.entries(user)) {
+    console.log(key, value) // "nom Alice", "age 30"
 }
 ```
