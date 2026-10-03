@@ -64,6 +64,8 @@ export default withMermaid(
                         text: "JavaScript",
                         items: [
                             { text: "Variables", link: "/javascript/variables" },
+                            { text: "Objets", link: "/javascript/objets" },
+                            { text: "Tableaux", link: "/javascript/tableaux" },
                             { text: "Opérateurs", link: "/javascript/operateurs" },
                             { text: "Structures de contrôle", link: "/javascript/structures" },
                             { text: "Fonctions", link: "/javascript/fonctions" },
