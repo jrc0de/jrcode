@@ -78,3 +78,20 @@ const numbers = [1, 2, 2, 3, 3, 3]
 const unique = [...new Set(numbers)]
 // [1, 2, 3]
 ```
+
+## Opérations ensemblistes
+
+Les Set disposent de méthodes pour les opérations mathématiques sur les ensembles :
+
+```js
+const a = new Set([1, 2, 3])
+const b = new Set([2, 3, 4])
+
+a.union(b) // Set { 1, 2, 3, 4 }
+a.intersection(b) // Set { 2, 3 }
+a.difference(b) // Set { 1 }
+a.symmetricDifference(b) // Set { 1, 4 }
+a.isSubsetOf(b) // false
+a.isSupersetOf(b) // false
+a.isDisjointFrom(b) // false
+```
