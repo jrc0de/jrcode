@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "cheerio": "^1.2.0",
-        "hono": "^4.13.12",
+        "hono": "^4.13.13",
         "verovio": "^6.3.0"
     },
     "devDependencies": {
