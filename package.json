@@ -23,8 +23,8 @@
         "@types/node": "^26.6.4",
         "knip": "^6.39.0",
         "mermaid": "^12.1.0",
-        "oxfmt": "^0.71.0",
-        "oxlint": "^1.86.0",
+        "oxfmt": "^0.72.0",
+        "oxlint": "^1.87.0",
         "typescript": "^7.0.2",
         "vitepress": "^1.6.4",
         "vitepress-plugin-mermaid": "^2.0.17"

@@ -59,7 +59,7 @@ _italique_ ou _italique_
 ## Séparateur horizontal
 
 ```markdown
----
+***
 ```
 
 ## Code inline

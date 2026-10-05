@@ -63,14 +63,28 @@ export default withMermaid(
                     {
                         text: "JavaScript",
                         items: [
-                            { text: "Variables", link: "/javascript/variables" },
-                            { text: "Opérateurs", link: "/javascript/operateurs" },
-                            { text: "Structures de contrôle", link: "/javascript/structures" },
-                            { text: "Fonctions", link: "/javascript/fonctions" },
-                            { text: "Objets", link: "/javascript/objets" },
-                            { text: "Tableaux", link: "/javascript/tableaux" },
-                            { text: "Set", link: "/javascript/set" },
-                            { text: "Commentaires", link: "/javascript/commentaires" },
+                            {
+                                text: "Fondamentaux",
+                                items: [
+                                    { text: "Variables", link: "/javascript/variables" },
+                                    { text: "Opérateurs", link: "/javascript/operateurs" },
+                                    { text: "Structures de contrôle", link: "/javascript/structures" },
+                                    { text: "Commentaires", link: "/javascript/commentaires" },
+                                ],
+                            },
+                            {
+                                text: "Structures de données",
+                                items: [
+                                    { text: "Objets", link: "/javascript/objets" },
+                                    { text: "Tableaux", link: "/javascript/tableaux" },
+                                    { text: "Set", link: "/javascript/set" },
+                                    { text: "Map", link: "/javascript/map" },
+                                ],
+                            },
+                            {
+                                text: "Fonctions",
+                                items: [{ text: "Fonctions", link: "/javascript/fonctions" }],
+                            },
                         ],
                     },
                 ],
