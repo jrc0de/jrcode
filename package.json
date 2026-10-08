@@ -21,7 +21,7 @@
     },
     "devDependencies": {
         "@types/node": "^26.6.4",
-        "knip": "^6.39.0",
+        "knip": "^6.40.0",
         "mermaid": "^12.1.0",
         "oxfmt": "^0.72.0",
         "oxlint": "^1.87.0",

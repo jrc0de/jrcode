@@ -3,3 +3,6 @@ GET http://localhost:3000/rss/feed1
 
 ### FEED 2
 GET http://localhost:3000/rss/feed2
+
+### FEED 3
+GET http://localhost:3000/rss/feed3
