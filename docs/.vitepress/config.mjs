@@ -75,8 +75,8 @@ export default withMermaid(
                             {
                                 text: "Structures de données",
                                 items: [
-                                    { text: "Objets", link: "/javascript/objets" },
                                     { text: "Tableaux", link: "/javascript/tableaux" },
+                                    { text: "Objets", link: "/javascript/objets" },
                                     { text: "Set", link: "/javascript/set" },
                                     { text: "Map", link: "/javascript/map" },
                                 ],

@@ -1,7 +1,9 @@
 # Les tableaux
 
+## Définition
+
 Les tableaux sont des listes ordonnées de valeurs accessibles par index (commence à 0).
-En JavaScript, un tableau est un **objet** spécial.
+En JavaScript, un tableau est un objet spécial.
 
 ```js
 const alphabet = ["a", "b", "c"]

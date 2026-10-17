@@ -1,6 +1,8 @@
 # Les objets
 
-Un objet est une collection de **paires clé/valeur**. Chaque paire forme une **propriété** de l'objet.
+## Définition
+
+Un objet est une collection de paires clé/valeur. Chaque paire forme une propriété de l'objet.
 
 ```js
 const user = {

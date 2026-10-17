@@ -2,7 +2,18 @@
 
 ## Définition
 
-Une `Map` est une collection de paires _clé / valeur_. Contrairement à un objet classique, les clés peuvent être de n'importe quel type et l'ordre d'insertion est conservé. On peut créer une Map vide, puis la remplir :
+Une `Map` est une collection de paires clé/valeur, comme un objet. Chaque paire forme une entrée (_entry_) de la Map. Contrairement à un objet classique, les clés peuvent être de n'importe quel type et l'ordre d'insertion est conservé. Le constructeur reçoit un tableau de paires : chaque paire est un tableau [clé, valeur].
+
+```js
+const user = new Map([
+    // [key, value],
+    ["name", "John"],
+    ["age", 30],
+])
+// Map(2) { "name" => "John", "age" => 30 }
+```
+
+On peut aussi créer une Map vide, puis la remplir :
 
 ```js
 const user = new Map()
