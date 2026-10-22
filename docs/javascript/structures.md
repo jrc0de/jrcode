@@ -43,7 +43,7 @@ La boucle `for` répète un bloc de code un nombre défini de fois. Elle se comp
 
 ```js
 for (let i = 0; i < 10; i++) {
-    // code à répéter
+  // code à répéter
 }
 ```
 
@@ -51,9 +51,9 @@ for (let i = 0; i < 10; i++) {
 
 ```js
 for (let i = 0; i < 10; i++) {
-    if (i === 3) continue // saute le i === 3, passe à i === 4
-    if (i === 7) break // arrête la boucle, i === 8, 9 ne sont jamais atteints
-    console.log(i) // 0, 1, 2, 4, 5, 6
+  if (i === 3) continue // saute le i === 3, passe à i === 4
+  if (i === 7) break // arrête la boucle, i === 8, 9 ne sont jamais atteints
+  console.log(i) // 0, 1, 2, 4, 5, 6
 }
 ```
 
@@ -83,7 +83,7 @@ La boucle `for...of` parcourt les **valeurs** d'un **itérable** (tableau, chaî
 const fruits = ["pomme", "poire", "banane"]
 
 for (const fruit of fruits) {
-    console.log(fruit) // "pomme", "poire", "banane"
+  console.log(fruit) // "pomme", "poire", "banane"
 }
 ```
 
@@ -103,21 +103,21 @@ const user = { nom: "Alice", age: 30 }
 
 // Les clés
 for (const key of Object.keys(user)) {
-    console.log(key) // "nom", "age"
+  console.log(key) // "nom", "age"
 }
 
 // Les valeurs
 for (const value of Object.values(user)) {
-    console.log(value) // "Alice", 30
+  console.log(value) // "Alice", 30
 }
 
 // Les entrées (paires [key, value])
 for (const entry of Object.entries(user)) {
-    console.log(entry) // ["nom", "Alice"], ["age", 30]
+  console.log(entry) // ["nom", "Alice"], ["age", 30]
 }
 
 // Avec le destructuring, on obtient directement key et value
 for (const [key, value] of Object.entries(user)) {
-    console.log(key, value) // "nom Alice", "age 30"
+  console.log(key, value) // "nom Alice", "age 30"
 }
 ```

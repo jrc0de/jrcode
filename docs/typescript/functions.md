@@ -6,7 +6,7 @@ On peut typer les paramètres d'une fonction avec la même syntaxe que pour les 
 
 ```ts
 function add(a: number, b = 5) {
-    return a + b
+  return a + b
 }
 ```
 
@@ -16,7 +16,7 @@ Un paramètre peut être rendu optionnel avec `?`, à condition d'être placé a
 
 ```ts
 function greet(name: string, greeting?: string) {
-    return `${greeting ?? "Bonjour"}, ${name}`
+  return `${greeting ?? "Bonjour"}, ${name}`
 }
 
 greet("Alice") // OK
@@ -27,7 +27,7 @@ greet("Alice", "Salut") // OK
 
 ```ts
 function afficherId(id: string | number) {
-    console.log("Votre ID est : " + id)
+  console.log("Votre ID est : " + id)
 }
 
 afficherId(101) // OK
@@ -41,7 +41,7 @@ On peut aussi typer la valeur renvoyée par une fonction, en ajoutant l'annotati
 
 ```ts
 function add(a: number, b: number): number {
-    return a + b
+  return a + b
 }
 ```
 
@@ -51,7 +51,7 @@ Le type `void` représente le type de retour d'une fonction qui ne renvoie rien 
 
 ```ts
 function log(message: string): void {
-    console.log(message)
+  console.log(message)
 }
 
 let result = log("Hello") // result vaut undefined, mais typé void
@@ -63,7 +63,7 @@ Le type `never` représente le type de retour d'une fonction qui ne se termine j
 
 ```ts
 function fail(message: string): never {
-    throw new Error(message)
+  throw new Error(message)
 }
 ```
 
@@ -81,9 +81,9 @@ Cette syntaxe est très utile pour typer un paramètre qui attend lui-même une 
 
 ```ts
 function repeter(n: number, action: (index: number) => void) {
-    for (let i = 0; i < n; i++) {
-        action(i)
-    }
+  for (let i = 0; i < n; i++) {
+    action(i)
+  }
 }
 
 repeter(3, (i) => console.log("Itération " + i))

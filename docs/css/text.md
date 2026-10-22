@@ -6,10 +6,10 @@ La propriété `font-size` définit la taille du texte. Elle peut être exprimé
 
 ```css
 p {
-    font-size: 16px; /* taille fixe en pixels */
-    font-size: 1.2rem; /* relative à la taille de police du <html> */
-    font-size: 1.2em; /* relative à la taille de police du parent */
-    font-size: 120%; /* relative à la taille de police du parent (en %) */
+  font-size: 16px; /* taille fixe en pixels */
+  font-size: 1.2rem; /* relative à la taille de police du <html> */
+  font-size: 1.2em; /* relative à la taille de police du parent */
+  font-size: 120%; /* relative à la taille de police du parent (en %) */
 }
 ```
 
@@ -23,7 +23,7 @@ La propriété `font-family` définit la police utilisée pour le texte. On lui 
 
 ```css
 p {
-    font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 ```
 
@@ -35,11 +35,11 @@ Un nom de police contenant des espaces doit être entouré de guillemets (ex. `"
 
 ```css
 @font-face {
-    font-family: "Source Serif";
-    src: url("fonts/source-serif-4-regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Source Serif";
+  src: url("fonts/source-serif-4-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 ```
 
@@ -49,10 +49,10 @@ La propriété `text-transform` permet de modifier automatiquement la casse du t
 
 ```css
 p {
-    text-transform: uppercase; /* TOUT EN MAJUSCULES */
-    text-transform: lowercase; /* tout en minuscules */
-    text-transform: capitalize; /* Première Lettre En Majuscule */
-    text-transform: none; /* aucune transformation (valeur par défaut) */
+  text-transform: uppercase; /* TOUT EN MAJUSCULES */
+  text-transform: lowercase; /* tout en minuscules */
+  text-transform: capitalize; /* Première Lettre En Majuscule */
+  text-transform: none; /* aucune transformation (valeur par défaut) */
 }
 ```
 
@@ -62,8 +62,8 @@ La propriété `font-style` permet d'afficher le texte en italique.
 
 ```css
 p {
-    font-style: normal; /* pas d'italique (valeur par défaut) */
-    font-style: italic; /* italique */
+  font-style: normal; /* pas d'italique (valeur par défaut) */
+  font-style: italic; /* italique */
 }
 ```
 
@@ -73,10 +73,10 @@ La propriété `line-height` définit la hauteur d'une ligne de texte, c'est-à-
 
 ```css
 p {
-    line-height: 1.5; /* valeur sans unité (recommandé) */
-    line-height: 24px; /* valeur fixe en pixels */
-    line-height: 150%; /* pourcentage de la taille de police */
-    line-height: normal; /* valeur par défaut (dépend de la police, ~1.2) */
+  line-height: 1.5; /* valeur sans unité (recommandé) */
+  line-height: 24px; /* valeur fixe en pixels */
+  line-height: 150%; /* pourcentage de la taille de police */
+  line-height: normal; /* valeur par défaut (dépend de la police, ~1.2) */
 }
 ```
 
@@ -90,9 +90,9 @@ La propriété `text-align` définit l'alignement horizontal du texte à l'inté
 
 ```css
 p {
-    text-align: left; /* aligné à gauche */
-    text-align: right; /* aligné à droite */
-    text-align: center; /* centré */
-    text-align: justify; /* justifié (aligné à gauche ET à droite) */
+  text-align: left; /* aligné à gauche */
+  text-align: right; /* aligné à droite */
+  text-align: center; /* centré */
+  text-align: justify; /* justifié (aligné à gauche ET à droite) */
 }
 ```

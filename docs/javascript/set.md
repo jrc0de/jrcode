@@ -46,7 +46,7 @@ Un Set est itérable : on peut le parcourir avec `for...of` ou `forEach`.
 const letters = new Set(["a", "b", "c"])
 
 for (const letter of letters) {
-    console.log(letter) // "a", "b", "c"
+  console.log(letter) // "a", "b", "c"
 }
 
 letters.forEach((letter) => console.log(letter))

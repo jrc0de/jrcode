@@ -32,13 +32,13 @@ Les listes non ordonnées utilisent la balise `ul` avec des éléments `li`, et 
 
 ```html
 <ul>
-    <li>Élément de liste</li>
-    <li>Autre élément</li>
+  <li>Élément de liste</li>
+  <li>Autre élément</li>
 </ul>
 
 <ol>
-    <li>Premier élément</li>
-    <li>Deuxième élément</li>
+  <li>Premier élément</li>
+  <li>Deuxième élément</li>
 </ol>
 ```
 
@@ -47,7 +47,12 @@ Les listes non ordonnées utilisent la balise `ul` avec des éléments `li`, et 
 Les images sont insérées avec la balise `img`, qui est auto-fermante. Elle utilise plusieurs attributs essentiels.
 
 ```html
-<img src="img/image.jpg" alt="Description de l'image" width="300" height="200" />
+<img
+  src="img/image.jpg"
+  alt="Description de l'image"
+  width="300"
+  height="200"
+/>
 ```
 
 - `src` : chemin ou URL de l'image
@@ -102,7 +107,8 @@ Permettent de naviguer vers une section précise de la page via l'attribut `id`.
 Pour ouvrir le client mail ou composer un appel téléphonique.
 
 ```html
-<a href="mailto:contact@example.com">Nous écrire</a> <a href="tel:+33600000000">Nous appeler</a>
+<a href="mailto:contact@example.com">Nous écrire</a>
+<a href="tel:+33600000000">Nous appeler</a>
 ```
 
 ### Attributs courants

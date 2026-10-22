@@ -6,8 +6,8 @@ Pour typer un objet, on précise le type de chacune de ses propriétés entre ac
 
 ```ts
 let user: { name: string; age: number } = {
-    name: "Alice",
-    age: 25,
+  name: "Alice",
+  age: 25,
 }
 
 user.age = "twenty" // Error [!code error]
@@ -19,8 +19,8 @@ Comme pour les variables simples, TypeScript est capable de déduire le type d'u
 
 ```ts
 let user = {
-    name: "Alice",
-    age: 25,
+  name: "Alice",
+  age: 25,
 } // TypeScript déduit : { name: string; age: number }
 
 user.age = "twenty" // Error [!code error]
@@ -32,7 +32,7 @@ On peut rendre une propriété optionnelle avec `?`. Elle peut alors être omise
 
 ```ts
 let user: { name: string; age?: number } = {
-    name: "Alice",
+  name: "Alice",
 }
 ```
 

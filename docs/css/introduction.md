@@ -6,9 +6,9 @@ Une règle CSS utilise un sélecteur pour cibler un élément HTML. Le bloc de d
 
 ```css
 h1 {
-    font-family: "Source Serif";
-    font-weight: 400;
-    color: blue;
+  font-family: "Source Serif";
+  font-weight: 400;
+  color: blue;
 }
 ```
 
@@ -26,13 +26,13 @@ Le style est écrit dans une balise `<style>` placée dans le `<head>` du docume
 
 ```html
 <head>
-    <style>
-        h1 {
-            font-family: "Source Serif";
-            font-weight: 400;
-            color: blue;
-        }
-    </style>
+  <style>
+    h1 {
+      font-family: "Source Serif";
+      font-weight: 400;
+      color: blue;
+    }
+  </style>
 </head>
 ```
 
@@ -42,15 +42,15 @@ Le style est écrit dans un fichier `.css` séparé, lié au document HTML via u
 
 ```html
 <head>
-    <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 ```
 
 ```css
 /* styles.css */
 h1 {
-    font-family: "Source Serif";
-    font-weight: 400;
-    color: blue;
+  font-family: "Source Serif";
+  font-weight: 400;
+  color: blue;
 }
 ```

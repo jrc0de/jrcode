@@ -6,9 +6,9 @@ Un objet est une collection de paires clé/valeur. Chaque paire forme une propri
 
 ```js
 const user = {
-    // key : value,
-    name: "John",
-    age: 30,
+  // key : value,
+  name: "John",
+  age: 30,
 }
 ```
 
@@ -51,8 +51,8 @@ Dans un littéral d'objet, des crochets autour d'une **expression** permettent d
 const key = "email"
 
 const user = {
-    name: "Jean",
-    [key]: "jean@mail.com",
+  name: "Jean",
+  [key]: "jean@mail.com",
 }
 // { name: "Jean", email: "jean@mail.com" }
 ```
@@ -159,8 +159,8 @@ Le spread est une _shallow copy_ : pour modifier une propriété d'un objet imbr
 const user = { name: "Jean", address: { city: "Paris", zip: "75000" } }
 
 const moved = {
-    ...user,
-    address: { ...user.address, city: "Lyon" },
+  ...user,
+  address: { ...user.address, city: "Lyon" },
 }
 // moved.address = { city: "Lyon", zip: "75000" }
 // user.address.city est toujours "Paris"
@@ -221,8 +221,8 @@ Pour un objet imbriqué, on imbrique les accolades :
 const user = { name: "Jean", address: { city: "Lyon", zip: "69000" } }
 
 const {
-    name,
-    address: { city, zip },
+  name,
+  address: { city, zip },
 } = user
 // name = "Jean", city = "Lyon", zip = "69000"
 ```

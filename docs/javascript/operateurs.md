@@ -137,7 +137,7 @@ const [first, ...rest] = ["bread", "milk", "eggs", "butter"]
 // rest = ['milk', 'eggs', 'butter']
 
 function showItems(...items) {
-    console.log(items) // ['bread', 'milk', 'eggs']
+  console.log(items) // ['bread', 'milk', 'eggs']
 }
 
 showItems("bread", "milk", "eggs")

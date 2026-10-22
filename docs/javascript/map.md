@@ -6,9 +6,9 @@ Une `Map` est une collection de paires clé/valeur, comme un objet. Chaque paire
 
 ```js
 const user = new Map([
-    // [key, value],
-    ["name", "John"],
-    ["age", 30],
+  // [key, value],
+  ["name", "John"],
+  ["age", 30],
 ])
 // Map(2) { "name" => "John", "age" => 30 }
 ```

@@ -39,7 +39,7 @@ _italique_ ou _italique_
 ```markdown
 - Item 1
 - Item 2
-    - Sous-élément
+  - Sous-élément
 ```
 
 ## Listes ordonnées
@@ -59,7 +59,7 @@ _italique_ ou _italique_
 ## Séparateur horizontal
 
 ```markdown
-***
+---
 ```
 
 ## Code inline
@@ -108,5 +108,9 @@ Un troisième argument optionnel, entre guillemets, ajoute un attribut `title` �
 Génère :
 
 ```html
-<img src="chemin/vers/image.png" alt="Texte alternatif" title="Légende de l'image" />
+<img
+  src="chemin/vers/image.png"
+  alt="Texte alternatif"
+  title="Légende de l'image"
+/>
 ```

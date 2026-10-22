@@ -6,7 +6,7 @@ TypeScript peut refuser d'utiliser une valeur potentiellement `null` ou `undefin
 
 ```ts
 function getLength(text: string | undefined) {
-    return text!.length // on affirme que `text` ne sera pas undefined ici
+  return text!.length // on affirme que `text` ne sera pas undefined ici
 }
 ```
 

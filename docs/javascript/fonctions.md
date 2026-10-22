@@ -10,7 +10,7 @@ Le mot clé **return** (optionnel) permet de retourner une valeur ; sans lui la 
 
 ```js
 function add(a, b) {
-    return a + b
+  return a + b
 }
 ```
 
@@ -20,7 +20,7 @@ Une _expression de fonction_ ou _fonction anonyme_ est une fonction sans nom ass
 
 ```js
 const add = function (a, b) {
-    return a + b
+  return a + b
 }
 ```
 
@@ -41,13 +41,13 @@ Quand une fonction est assignée comme propriété d'un objet, on l'appelle une 
 
 ```js
 const calculator = {
-    add: function (a, b) {
-        return a + b
-    },
-    // Syntaxe raccourcie (ES6)
-    subtract(a, b) {
-        return a - b
-    },
+  add: function (a, b) {
+    return a + b
+  },
+  // Syntaxe raccourcie (ES6)
+  subtract(a, b) {
+    return a - b
+  },
 }
 
 calculator.add(2, 3) // 5
@@ -64,9 +64,9 @@ Dans une méthode, `this` référence l'objet qui contient la méthode :
 
 ```js
 const user = {
-    name: "John",
-    greet() {
-        return `Bonjour, je m'appelle ${this.name}`
-    },
+  name: "John",
+  greet() {
+    return `Bonjour, je m'appelle ${this.name}`
+  },
 }
 ```

@@ -17,7 +17,7 @@ Un attribut apporte des informations supplémentaires à un élément. Il se pla
 
 ```html
 <html lang="fr">
-    ...
+  ...
 </html>
 ```
 
@@ -27,8 +27,8 @@ Les éléments peuvent être imbriqués les uns dans les autres. L'élément con
 
 ```html
 <ul>
-    <li>Élément 1</li>
-    <li>Élément 2</li>
+  <li>Élément 1</li>
+  <li>Élément 2</li>
 </ul>
 ```
 
@@ -41,16 +41,16 @@ Tout code HTML doit être contenu entre les balises `<html>` et obligatoirement 
 <!DOCTYPE html>
 <!-- L'attribut lang indique la langue de la page -->
 <html lang="fr">
-    <head>
-        <!-- Encodage des caractères (nécessaire pour les accents) -->
-        <meta charset="UTF-8" />
-        <!-- Adaptation de l'affichage sur mobile -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Titre du document (visible dans les onglets des navigateurs) -->
-        <title>Accueil</title>
-    </head>
-    <body>
-        <!-- Les élements constitutifs de la page sont dans cette section -->
-    </body>
+  <head>
+    <!-- Encodage des caractères (nécessaire pour les accents) -->
+    <meta charset="UTF-8" />
+    <!-- Adaptation de l'affichage sur mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Titre du document (visible dans les onglets des navigateurs) -->
+    <title>Accueil</title>
+  </head>
+  <body>
+    <!-- Les élements constitutifs de la page sont dans cette section -->
+  </body>
 </html>
 ```

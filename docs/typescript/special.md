@@ -27,7 +27,7 @@ data = true // OK aussi
 data.toUpperCase() // [!code error] Erreur, `data` est de type `unknown`
 
 if (typeof data === "string") {
-    data.toUpperCase() // OK, TypeScript sait que `data` est une string ici
+  data.toUpperCase() // OK, TypeScript sait que `data` est une string ici
 }
 ```
 
@@ -66,9 +66,9 @@ Un `enum` permet de définir un ensemble fixe de valeurs nommées, quand on veut
 
 ```ts
 enum State {
-    Active,
-    Inactive,
-    Waiting,
+  Active,
+  Inactive,
+  Waiting,
 }
 
 // `State` est un nouveau type, utilisable comme n'importe quel autre type
@@ -81,9 +81,9 @@ Par défaut, chaque membre reçoit une valeur numérique automatique (0, 1, 2...
 
 ```ts
 enum Color {
-    Red = "#ff0000",
-    Green = "#00ff00",
-    Blue = "#0000ff",
+  Red = "#ff0000",
+  Green = "#00ff00",
+  Blue = "#0000ff",
 }
 ```
 

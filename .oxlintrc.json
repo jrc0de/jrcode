@@ -1,3 +1,7 @@
 {
-    "ignorePatterns": ["node_modules", "docs/.vitepress/dist", "docs/.vitepress/cache/deps"]
+  "ignorePatterns": [
+    "node_modules",
+    "docs/.vitepress/dist",
+    "docs/.vitepress/cache/deps"
+  ]
 }
