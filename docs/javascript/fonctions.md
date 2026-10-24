@@ -1,4 +1,4 @@
-# Fonctions
+# Déclaration de fonctions
 
 ## Fonctions déclaratives
 
@@ -30,10 +30,33 @@ Une fonction fléchée est une syntaxe raccourcie pour écrire une expression de
 
 ```js
 const add = (a, b) => a + b
-
-// Avec un seul paramètre, les parenthèses sont également optionnelles :
-const double = (x) => x * 2
 ```
+
+## Paramètres par défaut
+
+On peut donner une valeur par défaut à un paramètre avec `=`. Elle est utilisée quand l'argument n'est pas fourni (ou vaut `undefined`) :
+
+```js
+function greet(name = "inconnu") {
+  return `Bonjour ${name}`
+}
+
+greet("Alice") // "Bonjour Alice"
+greet() // "Bonjour inconnu"
+```
+
+Cela fonctionne aussi avec les fonctions fléchées :
+
+```js
+const power = (base, exponent = 2) => base ** exponent
+
+power(3) // 9
+power(3, 3) // 27
+```
+
+::: tip Astuce
+On place de préférence les paramètres avec valeur par défaut en dernier.
+:::
 
 ## Méthodes
 

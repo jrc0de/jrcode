@@ -100,5 +100,5 @@ user.name = "James" // OK : on modifie le contenu, pas la variable
 
 Pour la suite, voir :
 
-- [Les objets](./objets)
 - [Les tableaux](./tableaux)
+- [Les objets](./objets)

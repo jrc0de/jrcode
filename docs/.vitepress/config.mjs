@@ -87,7 +87,12 @@ export default withMermaid(
               },
               {
                 text: "Fonctions",
-                items: [{ text: "Fonctions", link: "/javascript/fonctions" }],
+                items: [
+                  {
+                    text: "Fonctions",
+                    link: "/javascript/fonctions",
+                  },
+                ],
               },
             ],
           },
