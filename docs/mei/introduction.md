@@ -64,13 +64,14 @@ L'élément de description du fichier `<fileDesc>` est le seul sous-élément di
 </meiHead>
 ```
 
-L'élément de titre de l'œuvre `<titleStmt>` doit aussi être présent ; tout comme son sous-élément `<title>` qui porte le titre de l'œuvre mais peut rester vide.
+L'élément de titre de l'œuvre `<titleStmt>` doit aussi être présent ; tout comme son sous-élément `<title>` qui porte le titre de l'œuvre mais peut rester vide. Il peut aussi contenir un élément `<composer>` (facultatif) pour le nom du compositeur.
 
 ```xml
 <meiHead>
     <fileDesc>
         <titleStmt> <!-- [!code highlight] -->
-            <title></title> <!-- [!code highlight] -->
+            <title>Clair de lune</title> <!-- [!code highlight] -->
+            <composer>Claude Debussy</composer> <!-- [!code highlight] -->
         </titleStmt> <!-- [!code highlight] -->
         <pubStmt></pubStmt>
     </fileDesc>
