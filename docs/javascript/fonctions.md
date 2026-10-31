@@ -93,3 +93,26 @@ const user = {
   },
 }
 ```
+
+## Fonctions de rappel
+
+En JavaScript, les fonctions sont des **valeurs** : on peut les stocker dans une variable, les passer en argument ou les retourner. Une **fonction de rappel** (_callback_) est une fonction passée en argument à une autre fonction, qui se charge de l'appeler au moment voulu.
+
+Une fonction qui reçoit une fonction en argument ou en retourne une est appelée **fonction d'ordre supérieur** (_higher-order function_).
+
+```js
+const add = (a, b) => a + b
+
+// `operation` est le paramètre qui reçoit le callback
+function calculate(a, b, operation) {
+  return operation(a, b)
+}
+
+calculate(2, 3, add) // 5
+```
+
+Ici, `calculate` est la fonction d'ordre supérieur et `add` est le callback.
+
+::: warning Attention
+On passe la **référence** de la fonction (`add`), sans parenthèses. Écrire `add()` l'exécuterait immédiatement et passerait son résultat.
+:::

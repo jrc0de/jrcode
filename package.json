@@ -16,7 +16,7 @@
     "@hono/bun": "^1.0.1",
     "cheerio": "^1.2.0",
     "hono": "^4.13.14",
-    "verovio": "^6.3.0"
+    "verovio": "^6.4.0"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
