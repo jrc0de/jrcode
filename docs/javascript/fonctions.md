@@ -116,3 +116,25 @@ Ici, `calculate` est la fonction d'ordre supérieur et `add` est le callback.
 ::: warning Attention
 On passe la **référence** de la fonction (`add`), sans parenthèses. Écrire `add()` l'exécuterait immédiatement et passerait son résultat.
 :::
+
+## Retourner une fonction
+
+Puisque les fonctions sont des valeurs, une fonction peut aussi en retourner une autre. C'est le second cas de figure des fonctions d'ordre supérieur.
+
+```js
+function createMultiplier(factor) {
+  return function (n) {
+    return n * factor
+  }
+}
+
+const double = createMultiplier(2)
+const triple = createMultiplier(3)
+
+double(5) // 10
+triple(5) // 15
+```
+
+Ici, `createMultiplier` est une **fonction fabrique** (_factory function_) : chaque appel produit une nouvelle fonction configurée avec sa propre valeur de `factor`.
+
+La fonction retournée « se souvient » de `factor` même après la fin de l'exécution de `createMultiplier` : c'est le principe des _closures_.
