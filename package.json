@@ -16,13 +16,13 @@
     "@hono/bun": "^1.0.1",
     "cheerio": "^1.2.0",
     "hono": "^4.13.16",
-    "verovio": "^6.4.0"
+    "verovio": "^6.4.1"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
     "knip": "^6.44.1",
-    "mermaid": "^12.2.0",
-    "oxlint": "^1.90.0",
+    "mermaid": "^12.3.0",
+    "oxlint": "^1.91.0",
     "typescript": "^7.0.2",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17"

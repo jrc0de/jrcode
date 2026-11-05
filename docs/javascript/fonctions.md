@@ -94,6 +94,39 @@ const user = {
 }
 ```
 
+## Définir `this` avec `call`
+
+Par défaut, `this` dépend de la façon dont la fonction est appelée. La méthode `call` permet de choisir explicitement la valeur de `this` et d'invoquer la fonction immédiatement. Elle prend la valeur de `this` en premier argument, puis les arguments de la fonction séparés par des virgules.
+
+```js
+function greet(greeting) {
+  return `${greeting}, je m'appelle ${this.name}`
+}
+
+const alice = { name: "Alice" }
+const bob = { name: "Bob" }
+
+greet.call(alice, "Bonjour") // "Bonjour, je m'appelle Alice"
+greet.call(bob, "Salut") // "Salut, je m'appelle Bob"
+```
+
+La méthode `call` permet d'utiliser une méthode d'un objet sur un autre objet :
+
+```js
+const user = {
+  name: "John",
+  greet() {
+    return `Bonjour, je m'appelle ${this.name}`
+  },
+}
+
+const other = { name: "Marie" } // pas de méthode greet
+
+other.greet() // TypeError : other.greet is not a function [!code error]
+
+user.greet.call(other) // "Bonjour, je m'appelle Marie"
+```
+
 ## Fonctions de rappel
 
 En JavaScript, les fonctions sont des **valeurs** : on peut les stocker dans une variable, les passer en argument ou les retourner. Une **fonction de rappel** (_callback_) est une fonction passée en argument à une autre fonction, qui se charge de l'appeler au moment voulu.
