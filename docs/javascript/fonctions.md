@@ -127,9 +127,39 @@ other.greet() // TypeError : other.greet is not a function [!code error]
 user.greet.call(other) // "Bonjour, je m'appelle Marie"
 ```
 
+## Fixer `this` avec `bind`
+
+La méthode `bind` fonctionne comme `call`, mais n'invoque pas la fonction. Elle retourne une nouvelle fonction dont `this` est définitivement lié à la valeur passée en premier argument :
+
+```js
+function greet(greeting) {
+  return `${greeting}, je m'appelle ${this.name}`
+}
+
+const alice = { name: "Alice" }
+
+const greetAlice = greet.bind(alice)
+
+greetAlice("Bonjour") // "Bonjour, je m'appelle Alice"
+greetAlice("Salut") // "Salut, je m'appelle Alice"
+```
+
+La méthode `bind` accepte aussi des arguments supplémentaires après `this`. Ils sont fixés à l'avance et les arguments passés ensuite à la fonction liée viennent s'ajouter après. On parle d'**application partielle**. Ici, `this` n'est pas utilisé par la fonction : on passe donc `null` en premier argument :
+
+```js
+function multiply(a, b) {
+  return a * b
+}
+
+const double = multiply.bind(null, 2)
+
+double(5) // 10
+double(8) // 16
+```
+
 ## Fonctions de rappel
 
-En JavaScript, les fonctions sont des **valeurs** : on peut les stocker dans une variable, les passer en argument ou les retourner. Une **fonction de rappel** (_callback_) est une fonction passée en argument à une autre fonction, qui se charge de l'appeler au moment voulu.
+En JavaScript, les fonctions sont des valeurs : on peut les stocker dans une variable, les passer en argument ou les retourner. Une **fonction de rappel** (_callback_) est une fonction passée en argument à une autre fonction, qui se charge de l'appeler au moment voulu.
 
 Une fonction qui reçoit une fonction en argument ou en retourne une est appelée **fonction d'ordre supérieur** (_higher-order function_).
 
