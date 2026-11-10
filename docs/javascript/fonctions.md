@@ -201,3 +201,22 @@ triple(5) // 15
 Ici, `createMultiplier` est une **fonction fabrique** (_factory function_) : chaque appel produit une nouvelle fonction configurée avec sa propre valeur de `factor`.
 
 La fonction retournée « se souvient » de `factor` même après la fin de l'exécution de `createMultiplier` : c'est le principe des _closures_.
+
+## Fonctions IIFE
+
+Une **IIFE** (_Immediately Invoked Function Expression_) est une expression de fonction exécutée immédiatement après sa définition. On l'entoure de parenthèses, puis on l'appelle avec une seconde paire de parenthèses. Les parenthèses autour de la fonction indiquent au moteur JavaScript qu'il s'agit d'une expression et non d'une déclaration. Les variables déclarées à l’intérieur ne sont pas visibles à l’extérieur, ce qui permet d’isoler du code sans polluer la portée globale.
+
+```js
+;(function () {
+  console.log("Exécutée immédiatement")
+})()(
+  // Avec une fonction fléchée
+  () => {
+    console.log("Exécutée immédiatement")
+  },
+)()
+```
+
+::: warning Attention
+Quand on n'utilise pas de point-virgule dans son code, une IIFE commençant par `(` doit être précédée d'un `;`. Sinon JavaScript peut interpréter la ligne précédente et la parenthèse comme un appel de fonction.
+:::
