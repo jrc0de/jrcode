@@ -202,6 +202,35 @@ Ici, `createMultiplier` est une **fonction fabrique** (_factory function_) : cha
 
 La fonction retournée « se souvient » de `factor` même après la fin de l'exécution de `createMultiplier` : c'est le principe des _closures_.
 
+## Closures
+
+Une **closure** (fermeture) est une fonction qui conserve l'accès aux variables de la portée où elle a été créée, même une fois que cette portée a fini de s'exécuter. La variable `count` est inaccessible depuis l'extérieur : seule la fonction retournée peut la lire et la modifier. Chaque appel de `createCounter` crée sa propre variable `count`.
+
+```js
+function createCounter() {
+  let count = 0
+
+  return function () {
+    count++
+    return count
+  }
+}
+
+const counter = createCounter()
+
+counter() // 1
+counter() // 2
+counter() // 3
+
+const other = createCounter()
+
+other() // 1 (nouvelle variable `count`)
+```
+
+::: tip Astuce
+Les closures servent à garder un état privé (compteur, cache), à mémoriser une configuration ou à conserver du contexte dans un callback.
+:::
+
 ## Fonctions IIFE
 
 Une **IIFE** (_Immediately Invoked Function Expression_) est une expression de fonction exécutée immédiatement après sa définition. On l'entoure de parenthèses, puis on l'appelle avec une seconde paire de parenthèses. Les parenthèses autour de la fonction indiquent au moteur JavaScript qu'il s'agit d'une expression et non d'une déclaration. Les variables déclarées à l’intérieur ne sont pas visibles à l’extérieur, ce qui permet d’isoler du code sans polluer la portée globale.
